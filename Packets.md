@@ -23,7 +23,18 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     <ol type=1>
       <li>Your ID.</li>
       <li>Host's ID.</li>
-      <li>A list of players, starting at ID 0 and increasing by 1 each item. <code>null</code> indicates that player left.</li>
+      <li>A list of players, starting at ID 0 and increasing by 1 each item. <code>null</code> indicates that player left. Each player still present is represented by an object:
+      <ul>
+        <li>"peerId": Peer ID. Useless for most purposes.</li>
+        <li>"userName": The player's username.</li>
+        <li>"guest": <code>true</code> if the player is a guest, otherwise <code>false</code>.</li>
+        <li>"team": The player's team. 0=Spectator, 1=FFA, 2=Red, 3=Blue, 4=Green, 5=Yellow</li>
+        <li>"level": The player's level. 0 if the player is a guest.</li>
+        <li>"ready": <code>true</code> if the player is ready (has a checkmark), otherwise <code>false</code>.</li>
+        <li>"tabbed": <code>true</code> if the player is not focused on the tab, otherwise <code>false</code>.</li>
+        <li>"avatar": A JSON object representing the player's skin.</li>
+      </ul>
+      </li>
       <li>Server Unix timestamp??</li>
       <li><code>true</code> if teams are locked, otherwise <code>false</code>.</li>
       <li>Room ID.</li>
@@ -42,7 +53,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li><code>true</code> if the new user is a guest, otherwise <code>false</code>.</li>
       <li>The new player's level.</li>
       <li>If the player is tabbed out?</li>
-      <li>The new player's skin.</li>
+      <li>A JSON object representing the new player's skin.</li>
     </ol>
   </p></li>
   <li><p>
