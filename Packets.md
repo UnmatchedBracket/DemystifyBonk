@@ -3,6 +3,15 @@ If you've connected to a bonk.io server, these are the packets to use.
 
 Each packet usually starts with "42" and then has a JSON list. The first item in the list specifies what type of packet it is.
 
+<span id="common_schemes"></span>
+## Common Schemes
+### Team
+|0|1|2|3|4|5|
+|-|-|-|-|-|-|
+|Spec|FFA|Red|Blue|Green|Yellow|
+
+
+
 ## Incoming
 <ul>
   <li><p>
@@ -28,7 +37,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
         <li>"peerId": Peer ID. Useless for most purposes.</li>
         <li>"userName": The player's username.</li>
         <li>"guest": <code>true</code> if the player is a guest, otherwise <code>false</code>.</li>
-        <li>"team": The player's team. 0=Spectator, 1=FFA, 2=Red, 3=Blue, 4=Green, 5=Yellow</li>
+        <li>"team": The player's team. See <a href="#common_schemes">Common Scemes</a></li>
         <li>"level": The player's level. 0 if the player is a guest.</li>
         <li>"ready": <code>true</code> if the player is ready (has a checkmark), otherwise <code>false</code>.</li>
         <li>"tabbed": <code>true</code> if the player is not focused on the tab, otherwise <code>false</code>.</li>
@@ -141,8 +150,18 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
         <li>rate_limit_countdown: You sent too many "Game starting in &lt;x&gt;" messages.</li>
         <li>rate_limit_abortcountdown: You sent too many "Countdown aborted!" messages.</li>
         <li>rate_limit_sma: You changed the map too quickly.</li>
+        <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
       </ul>
       </li>
+    </ol>
+  </p></li>
+  <li><p>
+    18: Team Change
+    <br>Example: <code>42[18,2,0]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The ID of the person that changed teams</li>
+      <li>The team they moved to (See <a href="#team_scheme">Common Scemes</a>)</li>
     </ol>
   </p></li>
 </ul>
