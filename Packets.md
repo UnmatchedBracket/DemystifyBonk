@@ -121,4 +121,28 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>Map + other game-related data?</li>
     </ol>
   </p></li>
+  <li><p>
+    16: Error
+    <br>Example: <code>42[16,"rate_limit_ready"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The error code. List (probably incomplete):
+      <ul>
+        <li>room_full: You tried to join a full room.</li>
+        <li>banned: You tried to join a room you've been kicked from.</li>
+        <li>no_client_entry: You sent some action but you're not in a room??</li>
+        <li>already_in_this_room: You tried to join a room that your user is already in.</li>
+        <li>join_rate_limited: You've tried to join rooms too quickly.</li>
+        <li>password_wrong: You tried to join a room, but you used the wrong password.</li>
+        <li>guest: You attemped to preform an action that requires you to be logged in.</li>
+        <li>rate_limit_ready: You hit the [READY] button too much.</li>
+        <li>host_change_rate_limited: You tried to give host too much.</li>
+        <li>rate_limit_mapsuggest: You suggested maps too quickly.</li>
+        <li>rate_limit_countdown: You sent too many "Game starting in &lt;x&gt;" messages.</li>
+        <li>rate_limit_abortcountdown: You sent too many "Countdown aborted!" messages.</li>
+        <li>rate_limit_sma: You changed the map too quickly.</li>
+      </ul>
+      </li>
+    </ol>
+  </p></li>
 </ul>
