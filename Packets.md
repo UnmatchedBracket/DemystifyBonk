@@ -6,7 +6,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
 ## Incoming
 <ul>
   <li><p>
-    1: A ping packet.
+    1: Ping
     <br>This packet is used to provide info about other player's pings, as well as to measure your own.
     <br>Example: <code>42[1,{"30":180,"33":148,"34":190},9]</code>
     <br>Items:
@@ -16,7 +16,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     </ol>
   </p></li>
   <li><p>
-    3: Join packet.
+    3: Room join
     <br>This packet is used to provide some information about a lobby when you join it.
     <br>Example: <code>42[3,3,0,[{"peerID":"vuzvugdrnja00000","userName":"user one","guest":true,"team":1,"level":0,"ready":false,"tabbed":true,"avatar":{"layers":[],"bc":9315498}},null,null,{"peerID":"nx25am3w8d700000","userName":"left paren","guest":false,"team":1,"level":106,"ready":false,"tabbed":false,"avatar":{"layers":[{"id":34,"scale":0.4000000059604645,"angle":-90,"x":-5,"y":0,"flipX":false,"flipY":false,"color":1641226}],"bc":61591}}],0,false,901003,"mtomw",null]</code>
     <br>Items:
@@ -43,7 +43,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     </ol>
   </p></li>
   <li><p>
-    4: Player join packet.
+    4: Player join
     <br>Example: <code>42[4,21,"0qh12mq737fh0000","left paren",false,39,1,{"layers":[{"id":34,"scale":0.4000000059604645,"angle":-90,"x":-5,"y":0,"flipX":false,"flipY":false,"color":1641226}],"bc":61591}]</code>
     <br>Items:
     <ol type=1>
@@ -57,7 +57,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     </ol>
   </p></li>
   <li><p>
-    5: Player leave packet.
+    5: Player leave
     <br>Example: <code>42[5,13,14511]</code>
     <br>Items:
     <ol type=1>
@@ -66,7 +66,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     </ol>
   </p></li>
   <li><p>
-    6: Host leave packet.
+    6: Host leave
     <br>The host left, and may have closed the room.
     <br>Examples:
     <ul>
@@ -80,7 +80,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
     </ol>
   </p></li>
   <li><p>
-    7: Movement packet.
+    7: Movement
     <br>Examples:
     <ul>
       <li><code>42[7,1,{"i":38,"f":324,"c":45}]</code></li>
@@ -96,6 +96,29 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
         <li>"c": Sequence number. Starts at 0 and lasts the entire session, increasing by 1 every time the player makes an input.</li>
       </ul>
       </li>
+    </ol>
+  </p></li>
+  <li><p>
+    8: [READY] enabled/disabled
+    <br>Example: <code>42[8,1,true]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The ID of the person that changed their [READY] status</li>
+      <li><code>true</code> if the player enabled [READY], <code>false</code> if they disabled it.</li>
+    </ol>
+  </p></li>
+  <li><p>
+    13: Game End
+    <br>Example: <code>42[13]</code>
+  </p></li>
+  <li><p>
+    15: Game Start
+    <br>Example: <code>42[15,1658450696036,"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAUrkFguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0+li42ChcAG64AMIAhjAAilwmcFSa3gAuERRRJvoIhFyi0IK0FDBUUaBFXGakOlB4AKJWWgAWHvFFUAB2aABWHgDM+qSsSAAiXFNJagDOqGgAnlwAZs6LoPQc3ivVZr59EJFRSIKNOVz63YTje4SzR9EeMIMo42vYJgizmoRUAJKCKCtJBmLQAVzArQw0AAjBCPGYMpo2BAuCg4ABLCwgVFQYhYuLxOxcQitCyMJhEklwHQMWjAFa4RpIbqtfJccZo4bODzhejc-TOCgrAVQQRCkj-C76PpIcKoriDKCwijhPaw8KM6Kg3AzdK4UHAACOmjQVDiAA9Ruw0d1ZVMALyOoA",{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIADgM4BaJdoAkgBKSGy6YCuK-EAPTDhAd2QBhEOIGzgAXnlA","gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Unix time of start??</li>
+      <li>No clue <code>¯\_(ツ)_/¯</code></li>
+      <li>Map + other game-related data?</li>
     </ol>
   </p></li>
 </ul>
