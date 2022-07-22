@@ -3,6 +3,14 @@ If you've connected to a bonk.io server, these are the packets to use.
 
 Each packet usually starts with "42" and then has a JSON list. The first item in the list specifies what type of packet it is.
 
+Packets that break this rule:
+<ul>
+  <li><code>3probe</code>: <code>2probe</code>'s response</li>
+  <li><code>3</code>: <code>2</code>'s response (a heartbeat)</li>
+  <li><code>40</code>: Socket established?? (in response to <code>5</code></li>
+  <li><code>41</code>: WebSocket closed by server. This usually means you've been kicked from the lobby.</li>
+</ul>
+
 <span id="common_schemes"></span>
 ## Common Schemes
 ### Team
@@ -127,7 +135,7 @@ Contents:
     </ol>
   </p></li>
   <li id="inc8"><p>
-    8: [READY] enable/disable
+    8: [READY] logged inenable/disable
     <br>Example: <code>42[8,1,true]</code>
     <br>Items:
     <ol type=1>
