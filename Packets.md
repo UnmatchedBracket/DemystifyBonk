@@ -13,8 +13,24 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
 
 
 ## Incoming
+Contents:
 <ul>
-  <li><p>
+<li><a href="#inc1">1: Ping</a></li>
+<li><a href="#inc3">3: Room join</a></li>
+<li><a href="#inc4">4: Player join</a></li>
+<li><a href="#inc5">5: Player leave</a></li>
+<li><a href="#inc6">6: Host leave</a></li>
+<li><a href="#inc7">7: Movement</a></li>
+<li><a href="#inc8">8: [READY] enable/disable</a></li>
+<li><a href="#inc13">13: Game End</a></li>
+<li><a href="#inc15">15: Game Start</a></li>
+<li><a href="#inc16">16: Error</a></li>
+<li><a href="#inc18">18: Team Change</a></li>
+<li><a href="#inc19">19: Teamlock toggle</a></li>
+<li><a href="#inc20">20: Chat</a></li>
+</ul>
+<ul>
+  <li id="inc1"><p>
     1: Ping
     <br>This packet is used to provide info about other player's pings, as well as to measure your own.
     <br>Example: <code>42[1,{"30":180,"33":148,"34":190},9]</code>
@@ -24,7 +40,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>An number to determine which ping a client is responding to. The client should echo <code>42[1,{"id":<this number>}]</code> when this packet is recieved.</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc3"><p>
     3: Room join
     <br>This packet is used to provide some information about a lobby when you join it.
     <br>Example: <code>42[3,3,0,[{"peerID":"vuzvugdrnja00000","userName":"user one","guest":true,"team":1,"level":0,"ready":false,"tabbed":true,"avatar":{"layers":[],"bc":9315498}},null,null,{"peerID":"nx25am3w8d700000","userName":"left paren","guest":false,"team":1,"level":106,"ready":false,"tabbed":false,"avatar":{"layers":[{"id":34,"scale":0.4000000059604645,"angle":-90,"x":-5,"y":0,"flipX":false,"flipY":false,"color":1641226}],"bc":61591}}],0,false,901003,"mtomw",null]</code>
@@ -51,7 +67,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>I have no clue what this is. AFAIK it's always <code>null</code></li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc4"><p>
     4: Player join
     <br>Example: <code>42[4,21,"0qh12mq737fh0000","left paren",false,39,1,{"layers":[{"id":34,"scale":0.4000000059604645,"angle":-90,"x":-5,"y":0,"flipX":false,"flipY":false,"color":1641226}],"bc":61591}]</code>
     <br>Items:
@@ -65,7 +81,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>A JSON object representing the new player's skin.</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc5"><p>
     5: Player leave
     <br>Example: <code>42[5,13,14511]</code>
     <br>Items:
@@ -74,7 +90,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>The tick on which they left?</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc6"><p>
     6: Host leave
     <br>The host left, and may have closed the room.
     <br>Examples:
@@ -88,7 +104,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>The new host's ID. If this is -1, host closed the room.</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc7"><p>
     7: Movement
     <br>Examples:
     <ul>
@@ -107,8 +123,8 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       </li>
     </ol>
   </p></li>
-  <li><p>
-    8: [READY] enabled/disabled
+  <li id="inc8"><p>
+    8: [READY] enable/disable
     <br>Example: <code>42[8,1,true]</code>
     <br>Items:
     <ol type=1>
@@ -116,11 +132,11 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li><code>true</code> if the player enabled [READY], <code>false</code> if they disabled it.</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc13"><p>
     13: Game End
     <br>Example: <code>42[13]</code>
   </p></li>
-  <li><p>
+  <li id="inc15"><p>
     15: Game Start
     <br>Example: <code>42[15,1658450696036,"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAUrkFguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0+li42ChcAG64AMIAhjAAilwmcFSa3gAuERRRJvoIhFyi0IK0FDBUUaBFXGakOlB4AKJWWgAWHvFFUAB2aABWHgDM+qSsSAAiXFNJagDOqGgAnlwAZs6LoPQc3ivVZr59EJFRSIKNOVz63YTje4SzR9EeMIMo42vYJgizmoRUAJKCKCtJBmLQAVzArQw0AAjBCPGYMpo2BAuCg4ABLCwgVFQYhYuLxOxcQitCyMJhEklwHQMWjAFa4RpIbqtfJccZo4bODzhejc-TOCgrAVQQRCkj-C76PpIcKoriDKCwijhPaw8KM6Kg3AzdK4UHAACOmjQVDiAA9Ruw0d1ZVMALyOoA",{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIADgM4BaJdoAkgBKSGy6YCuK-EAPTDhAd2QBhEOIGzgAXnlA","gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}]</code>
     <br>Items:
@@ -130,7 +146,7 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       <li>Map + other game-related data?</li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc16"><p>
     16: Error
     <br>Example: <code>42[16,"rate_limit_ready"]</code>
     <br>Items:
@@ -155,13 +171,30 @@ Each packet usually starts with "42" and then has a JSON list. The first item in
       </li>
     </ol>
   </p></li>
-  <li><p>
+  <li id="inc18"><p>
     18: Team Change
     <br>Example: <code>42[18,2,0]</code>
     <br>Items:
     <ol type=1>
       <li>The ID of the person that changed teams</li>
       <li>The team they moved to (See <a href="#team_scheme">Common Scemes</a>)</li>
+    </ol>
+  </p></li>
+  <li id="inc19"><p>
+    19: Teamlock toggle
+    <br>Example: <code>42[19,true]</code>
+    <br>Items:
+    <ol type=1>
+      <li><code>true</code> if teams were locked, <code>false</code> if they were unlocked.</li>
+    </ol>
+  </p></li>
+  <li id="inc20"><p>
+    20: Chat
+    <br>Example: <code>42[20,0,"hello"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The ID of the person who sent the message.</li>
+      <li>The chat message.</li>
     </ol>
   </p></li>
 </ul>
