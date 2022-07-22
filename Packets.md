@@ -28,6 +28,9 @@ Contents:
 <li><a href="#inc18">18: Team Change</a></li>
 <li><a href="#inc19">19: Teamlock toggle</a></li>
 <li><a href="#inc20">20: Chat</a></li>
+<li><a href="#inc21">21: Initial data</a></li>
+<li><a href="#inc27">27: Round count change</a></li>
+<li><a href="#inc29">29: Map switch</a></li>
 </ul>
 <ul>
   <li id="inc1"><p>
@@ -143,7 +146,7 @@ Contents:
     <ol type=1>
       <li>Unix time of start??</li>
       <li>No clue <code>¯\_(ツ)_/¯</code></li>
-      <li>Map + other game-related data?</li>
+      <li>An object with map + other game-related data.</li>
     </ol>
   </p></li>
   <li id="inc16"><p>
@@ -195,6 +198,31 @@ Contents:
     <ol type=1>
       <li>The ID of the person who sent the message.</li>
       <li>The chat message.</li>
+    </ol>
+  </p></li>
+  <li id="inc21"><p>
+    21: Initial data
+    <br>Sent by the host after you join a room, this contains map and game data.
+    <br>Example: <code>42[21,{"map":{"v":13,"s":{"re":false,"nc":false,"pq":1,"gd":25,"fl":false},"physics":{"shapes":[],"fixtures":[],"bodies":[],"bro":[],"joints":[],"ppm":12},"spawns":[],"capZones":[],"m":{"a":"user one","n":"Unnamed","dbv":2,"dbid":-1,"authid":-1,"date":"","rxid":0,"rxn":"","rxa":"","rxdb":1,"cr":[],"pub":false,"mo":""}},"gt":2,"wl":3,"q":false,"tl":true,"tea":false,"ga":"b","mo":"b","bal":[]}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>An object with map + other game-related data.</li>
+    </ol>
+  </p></li>
+  <li id="inc27"><p>
+    27: Round count change
+    <br>Example: <code>42[27,7]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The new amount of rounds.</li>
+    </ol>
+  </p></li>
+  <li id="inc29"><p>
+    29: Map switch
+    <br>Example: <code>42[29,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>An encoded string containing the map. This format will likely be demystified in another file soon.</li>
     </ol>
   </p></li>
 </ul>
