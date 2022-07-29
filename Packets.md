@@ -37,6 +37,7 @@ Contents:
 <li><a href="#inc19">19: Teamlock toggle</a></li>
 <li><a href="#inc20">20: Chat</a></li>
 <li><a href="#inc21">21: Initial data</a></li>
+<li><a href="#inc26">26: Mode change</a></li>
 <li><a href="#inc27">27: Round count change</a></li>
 <li><a href="#inc29">29: Map switch</a></li>
 </ul>
@@ -215,6 +216,24 @@ Contents:
     <br>Items:
     <ol type=1>
       <li>An object with map + other game-related data.</li>
+    </ol>
+  </p></li>
+  <li id="inc26"><p>
+    26: Mode Change
+    <br>Example: <code>42[26,"b","ard"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The 'engine' for this mode. Known engines are "b" for most modes and "f" for Football.</li>
+      <li>The actual mode. Known modes are:
+      <ul>
+        <li>"f": Football</li>
+        <li>"bs": Simple</li>
+        <li>"ard": Death Arrows</li>
+        <li>"ar": Arrows</li>
+        <li>"sp": Grapple</li>
+        <li>"v": VTOL</li>
+        <li>"b": Classic</li>
+      </ul></li>
     </ol>
   </p></li>
   <li id="inc27"><p>
