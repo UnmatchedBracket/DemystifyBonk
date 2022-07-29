@@ -7,7 +7,7 @@ Packets that break this rule:
 <ul>
   <li><code>3probe</code>: <code>2probe</code>'s response</li>
   <li><code>3</code>: <code>2</code>'s response (a heartbeat)</li>
-  <li><code>40</code>: Socket established?? (in response to <code>5</code></li>
+  <li><code>40</code>: Socket established?? (in response to <code>5</code>)</li>
   <li><code>41</code>: WebSocket closed by server. This usually means you've been kicked from the lobby.</li>
 </ul>
 
