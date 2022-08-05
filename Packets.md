@@ -136,7 +136,7 @@ Contents:
     </ol>
   </p></li>
   <li id="inc8"><p>
-    8: [READY] logged inenable/disable
+    8: [READY] enable/disable
     <br>Example: <code>42[8,1,true]</code>
     <br>Items:
     <ol type=1>
