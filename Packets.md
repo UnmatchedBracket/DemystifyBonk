@@ -179,6 +179,7 @@ Contents:
         <li>rate_limit_abortcountdown: You sent too many "Countdown aborted!" messages.</li>
         <li>rate_limit_sma: You changed the map too quickly.</li>
         <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
+        <li>cant_ban_yourself: You tried to kick yourself. You just can't do that.</li>
       </ul>
       </li>
     </ol>
