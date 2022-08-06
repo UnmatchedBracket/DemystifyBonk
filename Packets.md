@@ -23,27 +23,35 @@ Packets that break this rule:
 ## Incoming
 Contents:
 <ul>
-<li><a href="#inc1">1: Ping</a></li>
+<li><a href="#inc1">1: Update Pings</a></li>
 <li><a href="#inc3">3: Room join</a></li>
 <li><a href="#inc4">4: Player join</a></li>
 <li><a href="#inc5">5: Player leave</a></li>
 <li><a href="#inc6">6: Host leave</a></li>
-<li><a href="#inc7">7: Movement</a></li>
-<li><a href="#inc8">8: [READY] enable/disable</a></li>
+<li><a href="#inc7">7: Inputs</a></li>
+<li><a href="#inc8">8: Ready Change</a></li>
 <li><a href="#inc13">13: Game End</a></li>
 <li><a href="#inc15">15: Game Start</a></li>
 <li><a href="#inc16">16: Error</a></li>
 <li><a href="#inc18">18: Team Change</a></li>
 <li><a href="#inc19">19: Teamlock toggle</a></li>
-<li><a href="#inc20">20: Chat</a></li>
+<li><a href="#inc20">20: Chat Message</a></li>
 <li><a href="#inc21">21: Initial data</a></li>
 <li><a href="#inc26">26: Mode change</a></li>
 <li><a href="#inc27">27: Round count change</a></li>
 <li><a href="#inc29">29: Map switch</a></li>
+<li><a href="#inc33">33: Map Suggest</a></li>
+<li><a href="#inc29">34: Map Suggest Client</a></li>
+<li><a href="#inc40">40: Save Replay</a></li>
+<li><a href="#inc40">43: Game starting Countdown</a></li>
+<li><a href="#inc41">44: Abort Countdown</a></li>
+<li><a href="#inc46">46: Local Gained XP</a></li>
+<li><a href="#inc52">52: out Status (AFK/TABBED)</a></li>
+
 </ul>
 <ul>
   <li id="inc1"><p>
-    1: Ping
+    1: Update Pings
     <br>This packet is used to provide info about other player's pings, as well as to measure your own.
     <br>Example: <code>42[1,{"30":180,"33":148,"34":190},9]</code>
     <br>Items:
@@ -117,7 +125,7 @@ Contents:
     </ol>
   </p></li>
   <li id="inc7"><p>
-    7: Movement
+    7: Inputs
     <br>Examples:
     <ul>
       <li><code>42[7,1,{"i":38,"f":324,"c":45}]</code></li>
@@ -136,7 +144,7 @@ Contents:
     </ol>
   </p></li>
   <li id="inc8"><p>
-    8: [READY] enable/disable
+    8: Ready Change
     <br>Example: <code>42[8,1,true]</code>
     <br>Items:
     <ol type=1>
@@ -165,6 +173,7 @@ Contents:
     <ol type=1>
       <li>The error code. List (probably incomplete):
       <ul>
+        <li>arm rate limited: You spammed save replay too fast</li>
         <li>room_full: You tried to join a full room.</li>
         <li>banned: You tried to join a room you've been kicked from.</li>
         <li>no_client_entry: You sent some action but you're not in a room??</li>
@@ -202,7 +211,7 @@ Contents:
     </ol>
   </p></li>
   <li id="inc20"><p>
-    20: Chat
+    20: Chat Message
     <br>Example: <code>42[20,0,"hello"]</code>
     <br>Items:
     <ol type=1>
@@ -238,11 +247,11 @@ Contents:
     </ol>
   </p></li>
   <li id="inc27"><p>
-    27: Round count change
+    27: Change WL (Rounds)
     <br>Example: <code>42[27,7]</code>
     <br>Items:
     <ol type=1>
-      <li>The new amount of rounds.</li>
+      <li>The new amount of rounds. (WIN/LOSE) </li>
     </ol>
   </p></li>
   <li id="inc29"><p>
@@ -253,4 +262,64 @@ Contents:
       <li>An encoded string containing the map. This format will likely be demystified in another file soon.</li>
     </ol>
   </p></li>
+    <li id="inc33"><p>
+    33: Map Suggest
+    <br> (Only host sees this packet other players see <a href="#inc34">Map Suggest Client</a> instead of this packet)
+    <br>Example: <code>42[33,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA",2]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The MAP Data</li>
+      <li>Player ID of player who suggested the map</li>
+    </ol>
+  </p></li>
+   <li id="inc34"><p>
+    34: Map Suggest Client
+    <br> (Host Sees <a href="#inc52">Map Suggest</a> instead of this packet)
+    <br>Example: <code>42[34,"CDball","MuadDib",2]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The Title of the map that was suggested</li>
+      <li>The Author of the map that was suggested</li>
+      <li>Player ID of player who suggested the map</li>
+    </ol>
+  </p></li>
+  <li id="inc40"><p>
+    40: Save Replay
+    <br>Example: <code>42[40,1]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The id of a player that tried to save replay</li>
+    </ol>
+  </p></li>
+  <li id="inc43"><p>
+    43: Game Starting Countdown
+    <br>Example: <code>42[43,3]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Countdown numberr</li>
+    </ol>
+  </p></li>
+  </p></li>
+    <li id="inc44"><p>
+    44: Abort Cooldown
+    <br>Example: <code>42[44]</code>
+  </p></li>
+  <li id="inc46"><p>
+    46: Local Gained XP
+    <br>Example: <code>42[46,{"newXP":300}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>"newXP": Your new XP</li>
+    </ol>
+  </p></li>
+   <li id="inc52"><p>
+    52: out Status (AFK/TABBED)
+    <br>Example: <code>42[52,3,false]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Player id of person who tabbed in/out</li>
+      <li><code>true</code> if player tabbed in <code>false</code> if player tabbed out/out</li>
+    </ol>
+  </p></li>
+  
 </ul>
