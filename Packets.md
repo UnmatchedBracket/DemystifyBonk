@@ -18,10 +18,8 @@ Packets that break this rule:
 |-|-|-|-|-|-|
 |Spec|FFA|Red|Blue|Green|Yellow|
 
-
-
-## Incoming
-Contents:
+## Contents
+### Incoming:
 <ul>
 <li><a href="#inc1">1: Update Pings</a></li>
 <li><a href="#inc3">3: Room join</a></li>
@@ -38,17 +36,36 @@ Contents:
 <li><a href="#inc20">20: Chat Message</a></li>
 <li><a href="#inc21">21: Initial data</a></li>
 <li><a href="#inc26">26: Mode change</a></li>
-<li><a href="#inc27">27: Round count change</a></li>
+<li><a href="#inc27">27: Change WL (Rounds)</a></li>
 <li><a href="#inc29">29: Map switch</a></li>
 <li><a href="#inc33">33: Map Suggest</a></li>
 <li><a href="#inc29">34: Map Suggest Client</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
 <li><a href="#inc40">43: Game starting Countdown</a></li>
-<li><a href="#inc41">44: Abort Countdown</a></li>
+<li><a href="#inc44">44: Abort Countdown</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
-
+<li><a href="#inc58">58: Room Name Update</a></li>
+<li><a href="#inc58">59: Room Password Update</a></li> 
 </ul>
+
+### Outgoing
+<ul>
+<li><a href="#out3">3: Send Inputs</a></li> 
+<li><a href="#out5">5: Trigger Start</a></li> 
+<li><a href="#out6">6: Change Own Team</a></li> 
+<li><a href="#out7">7: Team Lock</a></li> 
+<li><a href="#out9">9: Ban Player</a></li> 
+<li><a href="#out10">10: Chat Message</a></li> 
+<li><a href="#out14">14: Return To Lobby</a></li> 
+<li><a href="#out16">16: Set Ready/a></li> 
+</ul>
+
+_____
+
+
+## Incoming
+
 <ul>
   <li id="inc1"><p>
     1: Update Pings
@@ -149,7 +166,7 @@ Contents:
     <br>Items:
     <ol type=1>
       <li>The ID of the person that changed their [READY] status</li>
-      <li><code>true</code> if the player enabled [READY], <code>false</code> if they disabled it.</li>
+      <li><code>true</code> if the player is ready (has a checkmark), otherwise <code>false</code>.</li>
     </ol>
   </p></li>
   <li id="inc13"><p>
@@ -187,6 +204,10 @@ Contents:
         <li>rate_limit_countdown: You sent too many "Game starting in &lt;x&gt;" messages.</li>
         <li>rate_limit_abortcountdown: You sent too many "Countdown aborted!" messages.</li>
         <li>rate_limit_sma: You changed the map too quickly.</li>
+        <li>rate_limit_cot: You changed teams too quickly.</li>
+        <li>rate_limit_sgt: You changed modes too quickly</li>
+        <li>rate_limit_tl: You locked the teams too quickly</li>
+        <li>rate_limit: Generic rate-limit. You did something too fast.</li>
         <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
         <li>cant_ban_yourself: You tried to kick yourself. You just can't do that.</li>
       </ul>
@@ -326,5 +347,105 @@ Contents:
       <li><code>true</code> if player tabbed in, <code>false</code> if player tabbed out</li>
     </ol>
   </p></li>
-  
+  <li id="inc58"><p>
+    58: Room Name Update 
+    <br>Happens when host changes room name using /roomname "text here"
+    <br>Example: host does: /roomname "hello world" result everyone sees: <code>42[58,"hello world"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>new room name</li>
+    </ol>
+  </p></li>
+    <li id="inc59"><p>
+    59: Room Pass Update 
+    <br>Happens when host changes password name using /roompass "password here" or /clearroompass
+    <br>Example: host does: /roomname "1234" result everyone sees: <code>42[59,1]</code>
+    <br>Items:
+    <ol type=1>
+      <li>room Password Update Type (0 Being password was cleared 1 being password was set to something)</a>
+    </ol>
+  </p></li>
 </ul>
+
+_____
+
+## Outgoing
+
+<ul>
+  <li id="out3"><p>
+    3: Send Inputs 
+    <br>Examples:
+    <ul>
+      <li><code>42[4,{"i":38,"f":324,"c":45}]</code></li>
+      <li><code>42[4,{"i":25,"f":531,"c":108}]</code></li>
+    </ul>
+    <br>Items:
+    <ol type=1>
+      <li>An object:
+      <ul>
+        <li>"i": The inputs. Each bit is a direction. Left=1, right=2, up=4, down=8, heavy=16, special=32</li>
+        <li>"f": The frame this input was preformed on.</li>
+        <li>"c": Sequence number. Starts at 0 and lasts the entire session, increasing by 1 every time the player makes an input.</li>
+      </ul>
+      </li>
+    </ol>
+  </p></li>
+   <li id="out5"><p>
+    5: Trigger Start
+    <br>Start the game as a host
+    <br>Example: <code>42[5,{"is":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'is': No clue to be honest. This probably contains data like players</a></li></a>
+      <li>'gs': (Game settings or game state) An object with map + other game-related data.</li>
+    </ol>
+  </p></li>
+  <li id="out6"><p>
+    6: Change Own Team 
+    <br>Example: <code>42[6,{"targetTeam":0}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'targetTeam': The team you will move to. See <a href="#common_schemes">Common Scemes</a></li></a>
+    </ol>
+  </p></li>
+  <li id="out7"><p>
+    7: Team Lock
+    <br>Example: <code>42[7,{"teamLock":false}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'teamLock': whether to disable/enable team lock <code>true</code> to lock teams <code>false</code> false to have teams unlocked</li></a>
+    </ol>
+  </p></li>
+  <li id="out9"><p>
+    9: Ban Player
+    <br>Example: <code>42[9,{"banshortid":6}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'banshortid': The player's ID.</li></a>
+    </ol>
+  </p></li>
+  <li id="out10"><p>
+    10: Chat Message
+    <br>Send a chat message
+    <br>Example: <code>42[10,{"message":"Hello, World!"}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'message': The message you want to send</li></a>
+    </ol>
+  </p></li>
+    <li id="out14"><p>
+    14: Return To Lobby
+    <br>Exit out of the game to return to the lobby
+    <br>Example: <code>42[14]</code>
+  </p></li>
+   <li id="out16"><p>
+    16: Set Ready
+    <br>Enable/Disable the ready checkmark
+    <br>Example: <code>42[16,{"ready":false}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
+  </p></li>
+  
+ </ul>
+
