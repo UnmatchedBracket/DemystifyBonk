@@ -58,7 +58,7 @@ Packets that break this rule:
 <li><a href="#out9">9: Ban Player</a></li> 
 <li><a href="#out10">10: Chat Message</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
-<li><a href="#out16">16: Set Ready/a></li> 
+<li><a href="#out16">16: Set Ready</a></li> 
 </ul>
 
 _____
