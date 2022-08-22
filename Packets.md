@@ -46,7 +46,7 @@ Contents:
 <li><a href="#inc40">43: Game starting Countdown</a></li>
 <li><a href="#inc41">44: Abort Countdown</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
-<li><a href="#inc52">52: out Status (AFK/TABBED)</a></li>
+<li><a href="#inc52">52: Tabbed</a></li>
 
 </ul>
 <ul>
@@ -301,7 +301,7 @@ Contents:
   </p></li>
   </p></li>
     <li id="inc44"><p>
-    44: Abort Cooldown
+    44: Abort Countdown
     <br>Example: <code>42[44]</code>
   </p></li>
   <li id="inc46"><p>
@@ -309,16 +309,21 @@ Contents:
     <br>Example: <code>42[46,{"newXP":300}]</code>
     <br>Items:
     <ol type=1>
-      <li>"newXP": Your new XP</li>
+      <li>An object:
+      <ul>
+        <li>"newXP": Your new XP amount.</li>
+        <li>"newLevel" (only if you just leveled up): Your new level.</li>
+        <li>"newToken" (only if you just leveled up): The new token to use when preforming operations. Unknown if the old token stops functioning.</li>
+      </ul>
     </ol>
   </p></li>
    <li id="inc52"><p>
-    52: out Status (AFK/TABBED)
+    52: Tabbed
     <br>Example: <code>42[52,3,false]</code>
     <br>Items:
     <ol type=1>
       <li>Player id of person who tabbed in/out</li>
-      <li><code>true</code> if player tabbed in <code>false</code> if player tabbed out/out</li>
+      <li><code>true</code> if player tabbed in, <code>false</code> if player tabbed out</li>
     </ol>
   </p></li>
   
