@@ -18,10 +18,8 @@ Packets that break this rule:
 |-|-|-|-|-|-|
 |Spec|FFA|Red|Blue|Green|Yellow|
 
-
-
-## Incoming
-Contents:
+## Contents
+### Incoming:
 <ul>
 <li><a href="#inc1">1: Update Pings</a></li>
 <li><a href="#inc3">3: Room join</a></li>
@@ -46,25 +44,27 @@ Contents:
 <li><a href="#inc40">43: Game starting Countdown</a></li>
 <li><a href="#inc44">44: Abort Countdown</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
-<li><a href="#inc52">52: Out Status (AFK/TABBED)</a></li>
+<li><a href="#inc52">52: Tabbed</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc58">59: Room Password Update</a></li> 
 </ul>
 
-## Outgoing
-Contents:
+### Outgoing
 <ul>
 <li><a href="#out3">3: Send Inputs</a></li> 
 <li><a href="#out5">5: Trigger Start</a></li> 
 <li><a href="#out6">6: Change Own Team</a></li> 
-<li><a href="#out7">7: Do Team Lock</a></li> 
-<li><a href="#out9">9: Ban Player (kick)</a></li> 
+<li><a href="#out7">7: Team Lock</a></li> 
+<li><a href="#out9">9: Ban Player</a></li> 
 <li><a href="#out10">10: Chat Message</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready/a></li> 
 </ul>
 
-______
+_____
+
+
+## Incoming
 
 <ul>
   <li id="inc1"><p>
@@ -321,8 +321,8 @@ ______
     </ol>
   </p></li>
   </p></li>
-  <li id="inc44"><p>
-    44: Abort Cooldown
+    <li id="inc44"><p>
+    44: Abort Countdown
     <br>Example: <code>42[44]</code>
   </p></li>
   <li id="inc46"><p>
@@ -330,16 +330,21 @@ ______
     <br>Example: <code>42[46,{"newXP":300}]</code>
     <br>Items:
     <ol type=1>
-      <li>"newXP": Your new XP</li>
+      <li>An object:
+      <ul>
+        <li>"newXP": Your new XP amount.</li>
+        <li>"newLevel" (only if you just leveled up): Your new level.</li>
+        <li>"newToken" (only if you just leveled up): The new token to use when preforming operations. Unknown if the old token stops functioning.</li>
+      </ul>
     </ol>
   </p></li>
    <li id="inc52"><p>
-    52: Out Status (AFK/TABBED)
+    52: Tabbed
     <br>Example: <code>42[52,3,false]</code>
     <br>Items:
     <ol type=1>
       <li>Player id of person who tabbed in/out</li>
-      <li><code>true</code> if player tabbed in <code>false</code> if player tabbed out/out</li>
+      <li><code>true</code> if player tabbed in, <code>false</code> if player tabbed out</li>
     </ol>
   </p></li>
   <li id="inc58"><p>
@@ -361,6 +366,10 @@ ______
     </ol>
   </p></li>
 </ul>
+
+_____
+
+## Outgoing
 
 <ul>
   <li id="out3"><p>
@@ -400,7 +409,7 @@ ______
     </ol>
   </p></li>
   <li id="out7"><p>
-    7: Do Team Lock
+    7: Team Lock
     <br>Example: <code>42[7,{"teamLock":false}]</code>
     <br>Items:
     <ol type=1>
@@ -408,7 +417,7 @@ ______
     </ol>
   </p></li>
   <li id="out9"><p>
-    9: Ban Player (kick)
+    9: Ban Player
     <br>Example: <code>42[9,{"banshortid":6}]</code>
     <br>Items:
     <ol type=1>
