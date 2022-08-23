@@ -1,7 +1,63 @@
 TODO: Explain more
 
-Knowledge of what the keys in the JSON map format mean would be great!
+What the map keys mean (thanks kklkkj for [this amazing file](https://github.com/kklkkj/kklee/blob/master/src/kkleeApi.nim)):
+- v: The map data version.
+- m: Map metadata:
+  - n, a, date, mo: Map name, author, creation date, and reccomended mode.
+  - rxn, rxa: Original map name and author (for edits)
+  - dbid, dbv, authid: Database ID, bonk version for which the database ID is for (1 or 2), author account DBID
+  - pub: Whether or not map is public
+  - cr: A list of contributor's usernames.
+- spawns: A list of spawn objects:
+  - n: Spawn's name
+  - priority: Spawn's priority
+  - f, r, b, gr, ye: Booleans to indicate whether or not that team (ffa, red, blue, green, yellow) can spawn here.
+  - x, y, xv, yv: Starting position and velocity
+- capZones: A list of capzone objects:
+  - n: Capzone's name
+  - ty: Cap zone type. 1,2,3,4,5 = normal, instant [red, blue, green, yellow] win
+  - i: Fixture ID to attach to
+  - l: Time to capture for normal
+- physics: An object:
+  - ppm: The size of the map. Higher number = bigger players
+  - bodies: A list of bodies. These are called platforms in the editor.
+    - n: Platform's name
+    - type: One of "s" (stationary), "d" (free-moving) or "k" (kinematic)
+    - a, ad, av: Angle, angular drag and angular velocity
+    - de, fric, ld, re: Density, friction, linear drag, bounciness
+    - f_1, f_2, f_3, f_4, f_p: Whether or not this platform will collide with [A, B, C, D, players]
+    - f_c: The platform's collide group. A=1, B=2, C=3, D=4
+    - fr, fricp, bu: Whether or not [fixed rotation, fric players, anti-tunnel] is on
+    - p, lv: Position and starting velocity, in the form of a two-key object with x and y
+    - fx: Fixtures this platform is attached to
+    - cf: Constant force:
+      - x, y, ct: X force, Y force, and torque
+     - w: Force direction - true=absolute, false=relative
+  - fixtures: A list of fixture objects. Fixtures describe the properties of a shape.
+    - n: Fixture's name.
+    - d, ng, np, fp, ig: Whether or not [death, no grapple, no physics, fric players, inner grapple] is on
+    - de, re, fr: Density, bounciness, and friction. Null means to inherit the value.
+    - f: Fill color.
+    - sh: Shape ID to attach to.
+  - shapes: A list of shape objects.
+    - stype: The shape's type: "bx"=rectangle, "ci"=circle, "po"=polygon
+    - c: The shape's position, as an object of the form {"x":..., "y":...}
+    - a: Angle
+    - sk: Whether or not the shape shrinks over time. Not avaliable for polygons.
+    - ### **For rectangles:**
+    - w, h: Width and height
+    - ### **For circles:**
+    - r: Radius
+    - ### **For polygons:**
+    - s: Scale
+    - v: Vertices, as a list of {"x":..., "y":...} objects
+  - bro: A list of body IDs. The order here determines the display order.
+  - joints: A list of joint objects.
+    - ba: The body the join is on.
+    - bb: The other body the joint connects with, or -1 for none.
+    - *Other stuff probably, this object isn't completely documented.*
 
+  
 Code that decodes the map (may have changed in the Jul 22 update):
 ```js
 T.decodeFromDatabase = function(map) { /* arg previously named R5H*/
