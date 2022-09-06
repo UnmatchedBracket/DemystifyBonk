@@ -60,6 +60,20 @@ What the map keys mean (thanks kklkkj for [this amazing file](https://github.com
   
 Code that decodes the map (may have changed in the Jul 22 update):
 ```js
+/*
+T.<something>() values:
+getNewBoxShape: {"type":"bx","w":10,"h":40,"c":[0,0],"a":0,"sk":false}
+getNewCircleShape: {"type":"ci","r":25,"c":[0,0],"sk":false}
+getNewPolyShape: {"type":"po","v":[],"s":1,"a":0,"c":[0,0]}
+getNewFixture: {"n":"Def Fix","fr":0.3,"fp":null,"re":0.8,"de":0.3,"f":5209260,"d":false,"np":false,"ng":false}
+getNewBody: {"type":"s","n":"Unnamed","p":[0,0],"a":0,"fric":0.3,"fricp":false,"re":0.8,"de":0.3,"lv":[0,0],"av":0,"ld":0,"ad":0,"fr":false,"bu":false,"cf":{"x":0,"y":0,"w":true,"ct":0},"fx":[],"f_c":1,"f_p":true,"f_1":true,"f_2":true,"f_3":true,"f_4":true}
+getNewSpawn: {"x":400,"y":300,"xv":0,"yv":0,"priority":5,"r":true,"f":true,"b":true,"gr":false,"ye":false,"n":"Spawn"}
+getNewCapZone: {"n":"Cap Zone","ty":1,"l":10,"i":-1}
+getNewRevoluteJoint: {"type":"rv","d":{"la":0,"ua":0,"mmt":0,"ms":0,"el":false,"em":false,"cc":false,"bf":0,"dl":true},"aa":[0,0]}
+getNewDistanceJoint: {"type":"d","d":{"fh":0,"dr":0,"cc":false,"bf":0,"dl":true},"aa":[0,0],"ab":[0,0]}
+getNewLPJJoint: {"type":"lpj","d":{"cc":false,"bf":0,"dl":true},"pax":0,"pay":0,"pa":0,"pf":0,"pl":0,"pu":0,"plen":0,"pms":0}
+getNewLSJJoint: {"type":"lsj","d":{"cc":false,"bf":0,"dl":true},"sax":0,"say":0,"sf":0,"slen":0}
+*/
 T.decodeFromDatabase = function(map) { /* arg previously named R5H*/
             var a8k = [arguments]; // any variable like a8k[x] is just a normal variable, no need to worry about it being in a list
             b64mapdata = LZString.decompressFromEncodedURIComponent(map);
