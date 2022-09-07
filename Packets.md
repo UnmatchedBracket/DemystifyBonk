@@ -61,6 +61,11 @@ Packets that break this rule:
 <li><a href="#out12">12: create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
+<li><a href="#out20">20: send GAMO</a></li> 
+<li><a href="#out21">21: send WL (Rounds)</a></li> 
+<li><a href="#out23">23: send Map Add</a></li> 
+<li><a href="#out26">26: change Other Team</a></li> 
+
 </ul>
 
 _____
@@ -476,7 +481,7 @@ _____
     <br>Exit out of the game to return to the lobby
     <br>Example: <code>42[14]</code>
   </p></li>
-   <li id="out16"><p>
+  <li id="out16"><p>
     16: Set Ready
     <br>Enable/Disable the ready checkmark
     <br>Example: <code>42[16,{"ready":false}]</code>
@@ -484,6 +489,50 @@ _____
     <ol type=1>
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
+  <li id="out20"><p>
+    20: send GAMO
+    <br>packet Send to change the rooms mode
+    <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]	</code>
+    <br>Items:
+    <ol type=1>
+      <li>'ga': The 'engine' for this mode. Known engines are "b" for most modes and "f" for Football.</li>
+      <li>'mo': The actual mode. Known modes are:
+      <ul>
+        <li>"f": Football</li>
+        <li>"bs": Simple</li>
+        <li>"ard": Death Arrows</li>
+        <li>"ar": Arrows</li>
+        <li>"sp": Grapple</li>
+        <li>"v": VTOL</li>
+        <li>"b": Classic</li>
+      </ul></li>
+    </ol>
+  </p></li>
+  <li id="out21"><p>
+    21: send WL (Rounds)
+    <br>set the amount of rounds to win (Win/Lose)
+    <br>Example: <code>42[21,{"w":6}]	</code>
+    <br>Items:
+    <ol type=1>
+      <li>"w": The amount of rounds</ol>
+  </p></li>
+  <li id="out23"><p>
+    23: send Map Add
+    <br>Change the current map
+    <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}] </code>
+    <br>Items:
+    <ol type=1>
+      <li>"m": The Map Data</ol>
+  </p></li>
   
+   <li id="out26"><p>
+    26: Change Other Team 
+    <br>Example: <code42[26,{"targetID":1,"targetTeam":1}]	</code>
+    <br>Items:
+    <ol type=1>
+      <li>'targetID': The Players ID of who you are moving</li></a>
+      <li>'targetTeam': The team the person will be moved to. See <a href="#common_schemes">Common Scemes</a></li></a>
+    </ol>
+  </p></li>
  </ul>
 
