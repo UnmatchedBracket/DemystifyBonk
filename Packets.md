@@ -56,7 +56,9 @@ Packets that break this rule:
 <li><a href="#out6">6: Change Own Team</a></li> 
 <li><a href="#out7">7: Team Lock</a></li> 
 <li><a href="#out9">9: Ban Player</a></li> 
-<li><a href="#out10">10: Chat Message</a></li> 
+<li><a href="#out10">10: Chat Message</a></li>
+<li><a href="#out11">11: inform In Lobby</a></li> 
+<li><a href="#out12">12: create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
 </ul>
@@ -431,6 +433,42 @@ _____
     <br>Items:
     <ol type=1>
       <li>'message': The message you want to send</li></a>
+    </ol>
+  </p></li>
+  <li id="out11"><p>
+    11: inform In Lobby
+    <br>packet send by the host send to joining players to inform them about the game settings
+    <br>Example: <code>42[11,{"sid":2,"gs":{"map":{"v":13,"s":{"re":false,"nc":false,"pq":1,"gd":25,"fl":false},"physics":{"shapes":[],"fixtures":[],"bodies":[],"bro":[],"joints":[],"ppm":12},"spawns":[],"capZones":[],"m":{"a":"Showcase","n":"Empty Map","dbv":2,"dbid":767645,"authid":-1,"date":"","rxid":0,"rxn":"","rxa":"","rxdb":1,"cr":["uint32"],"pub":true,"mo":""}},"gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'sid': The sid that will be assigned to that player</li></a>
+      <li>'gs': Game settings (Stuff like the map and rounds etc)</li></a>
+    </ol>
+  </p></li>
+  <li id="out12"><p>
+    12: create Room
+    <br>packet send to create a room
+    <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
+   <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'peerID': Your peer id</li>
+      <li>'roomName': The room name</li></a>
+      <li>'maxPlayers': The max amount of players that can join that room</li></a>
+      <li>'password': The room password</li></a>
+      <li>'dbid': The room database ID</li></a>
+      <li>'guest': Whether you are a quest</li></a>
+      <li>'minLevel': The min amount of level you need to be to join that room</li></a>
+      <li>'maxLevel': The max amount of level you can be to be able to join that room</li></a>
+      <li>'latitude': latitude of your where your room is located</li></a>
+      <li>'longitude': longitude of your where your room is located</li></a>
+      <li>'country': The country code for your room</li></a>
+      <li>'version': Bonk.io Version? </li></a>
+      <li>'hidden': Whether the room shows up in the room list</li></a>
+      <li>'quick': Whether the room should be created in quickplay</li></a>
+      <li>'mode': Room mode. Can consist of these options: <code>bonkquick</code>,<code>arrowsquick</code>,<code>grapplequick</code>,<code>custom</code> </li></a>
+      <li>'guestName': What your guestname would be if guest is is set to true</li></a>
+      <li>'avatar': Your skin data</li></a>
     </ol>
   </p></li>
     <li id="out14"><p>
