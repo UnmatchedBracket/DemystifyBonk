@@ -65,7 +65,6 @@ Packets that break this rule:
 <li><a href="#out21">21: send WL (Rounds)</a></li> 
 <li><a href="#out23">23: send Map Add</a></li> 
 <li><a href="#out26">26: change Other Team</a></li> 
-
 </ul>
 
 _____
@@ -363,7 +362,7 @@ _____
       <li>new room name</li>
     </ol>
   </p></li>
-    <li id="inc59"><p>
+   <li id="inc59"><p>
     59: Room Pass Update 
     <br>Happens when host changes password name using /roompass "password here" or /clearroompass
     <br>Example: host does: /roomname "1234" result everyone sees: <code>42[59,1]</code>
@@ -524,8 +523,7 @@ _____
     <ol type=1>
       <li>"m": The Map Data</ol>
   </p></li>
-  
-   <li id="out26"><p>
+  <li id="out26"><p>
     26: Change Other Team 
     <br>Example: <code42[26,{"targetID":1,"targetTeam":1}]	</code>
     <br>Items:
