@@ -57,18 +57,19 @@ Packets that break this rule:
 <li><a href="#out7">7: Team Lock</a></li> 
 <li><a href="#out9">9: Ban Player</a></li> 
 <li><a href="#out10">10: Chat Message</a></li>
-<li><a href="#out11">11: inform In Lobby</a></li> 
-<li><a href="#out12">12: create Room</a></li> 
+<li><a href="#out11">11: Inform In Lobby</a></li> 
+<li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
-<li><a href="#out20">20: send GAMO</a></li> 
-<li><a href="#out21">21: send WL (Rounds)</a></li> 
-<li><a href="#out23">23: send Map Add</a></li> 
-<li><a href="#out26">26: change Other Team</a></li> 
-<li><a href="#out27">27: send Map Suggest</a></li> 
-<li><a href="#out29">29: send Balance</a></li> 
-<li><a href="#out32">32: send Team Settings Change</a></li> 
-<li><a href="#out33">33: send Arm Record</a></li> 
+<li><a href="#out20">20: Send GAMO</a></li> 
+<li><a href="#out21">21: Send WL (Rounds)</a></li> 
+<li><a href="#out23">23: Send Map Add</a></li> 
+<li><a href="#out26">26: Change Other Team</a></li> 
+<li><a href="#out27">27: Send Map Suggest</a></li> 
+<li><a href="#out29">29: Send Balance</a></li> 
+<li><a href="#out32">32: Send Team Settings Change</a></li> 
+<li><a href="#out33">33: Send Arm Record</a></li> 
+<li><a href="#out34">34: Send Host Change</a></li> 
 </ul>
 
 _____
@@ -444,7 +445,7 @@ _____
     </ol>
   </p></li>
   <li id="out11"><p>
-    11: inform In Lobby
+    11: Inform In Lobby
     <br>packet send by the host send to joining players to inform them about the game settings
     <br>Example: <code>42[11,{"sid":2,"gs":{"map":{"v":13,"s":{"re":false,"nc":false,"pq":1,"gd":25,"fl":false},"physics":{"shapes":[],"fixtures":[],"bodies":[],"bro":[],"joints":[],"ppm":12},"spawns":[],"capZones":[],"m":{"a":"Showcase","n":"Empty Map","dbv":2,"dbid":767645,"authid":-1,"date":"","rxid":0,"rxn":"","rxa":"","rxdb":1,"cr":["uint32"],"pub":true,"mo":""}},"gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}}]</code>
     <br>Items:
@@ -454,7 +455,7 @@ _____
     </ol>
   </p></li>
   <li id="out12"><p>
-    12: create Room
+    12: Create Room
     <br>packet send to create a room
     <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
    <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
@@ -493,7 +494,7 @@ _____
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
   <li id="out20"><p>
-    20: send GAMO
+    20: Send GAMO
     <br>packet Send to change the rooms mode
     <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]	</code>
     <br>Items:
@@ -512,7 +513,7 @@ _____
     </ol>
   </p></li>
   <li id="out21"><p>
-    21: send WL (Rounds)
+    21: Send WL (Rounds)
     <br>set the amount of rounds to win (Win/Lose)
     <br>Example: <code>42[21,{"w":6}]	</code>
     <br>Items:
@@ -520,7 +521,7 @@ _____
       <li>"w": The amount of rounds</ol>
   </p></li>
   <li id="out23"><p>
-    23: send Map Add
+    23: Send Map Add
     <br>Change the current map
     <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}] </code>
     <br>Items:
@@ -529,7 +530,7 @@ _____
   </p></li>
   <li id="out26"><p>
     26: Change Other Team 
-    <br>Example: <code42[26,{"targetID":1,"targetTeam":1}]	</code>
+    <br>Example: <code>42[26,{"targetID":1,"targetTeam":1}]	</code>
     <br>Items:
     <ol type=1>
       <li>'targetID': The Players ID of who you are moving</li></a>
@@ -537,8 +538,8 @@ _____
     </ol>
   </p></li>
   <li id="out27"><p>
-    27: send Map Suggest
-    <br>Example: <code42[27,{"m":"ILAMJAhBFBjBzCTlMiAHgEQCoCYCcAzgIYDqAHPAEakBiA7mecAMIC2tALlbgCYCMsfgDkAqtABqASRQo0wAA4ALGvgB2vABrDsEgKK0AykhYB2AFYBpFDMyz7SIA","mapname":"COolio mapio","mapauthor":"amogusSTAR"}]</code>
+    27: Send Map Suggest
+    <br>Example: <code>42[27,{"m":"ILAMJAhBFBjBzCTlMiAHgEQCoCYCcAzgIYDqAHPAEakBiA7mecAMIC2tALlbgCYCMsfgDkAqtABqASRQo0wAA4ALGvgB2vABrDsEgKK0AykhYB2AFYBpFDMyz7SIA","mapname":"COolio mapio","mapauthor":"amogusSTAR"}]</code>
     <br>Items:
     <ol type=1>
       <li>'m': The Map Data</li></a>
@@ -547,9 +548,9 @@ _____
     </ol>
   </p></li>
   <li id="out29"><p>
-    29: send Balance
+    29: Send Balance
     <br>Change a players nerf/buff
-    <br>Example: <code42[29,{"sid":2,"bal":-55}]</code>
+    <br>Example: <code>42[29,{"sid":2,"bal":-55}]</code>
     <br>Items:
     <ol type=1>
       <li>'sid': The Players ID of who you are adding the balance to</li></a>
@@ -557,17 +558,25 @@ _____
     </ol>
   </p></li>
   <li id="out32"><p>
-    32: send Team Settings Change
+    32: Send Team Settings Change
     <br>Enable/Disable teams
-    <br>Example: <code42[32,{"t":true}]</code>
+    <br>Example: <code>42[32,{"t":true}]</code>
     <br>Items:
     <ol type=1>
       <li>"t": <code>true</code> if teams should be on, otherwise it should be <code>false</code>.</li>
     </ol>
   </p></li>
   <li id="out33"><p>
-    33: send Arm Record
+    33: Send Arm Record
     <br>Save a replay
     <br>Example: <code42[33]</code>
+  </p></li>
+    <li id="out34"><p>
+    34: Send Host Change
+    <br>Give Host to someone
+    <br>Example: <code>42[34,{"id":1}]]</code>
+    <ol type=1>
+      <li>"id": The persons ID of who will be receiving host</li>
+    </ol>
   </p></li>
  </ul>
