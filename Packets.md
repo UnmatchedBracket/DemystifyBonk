@@ -571,7 +571,7 @@ _____
     <br>Save a replay
     <br>Example: <code42[33]</code>
   </p></li>
-    <li id="out34"><p>
+  <li id="out34"><p>
     34: Send Host Change
     <br>Give Host to someone
     <br>Example: <code>42[34,{"id":1}]]</code>
