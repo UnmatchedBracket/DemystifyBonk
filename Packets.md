@@ -553,7 +553,7 @@ _____
     <br>Items:
     <ol type=1>
       <li>'sid': The Players ID of who you are adding the balance to</li></a>
-      <li>'bal': The balance amont</li></a>
+      <li>'bal': The balance amount</li></a>
     </ol>
   </p></li>
   <li id="out32"><p>
@@ -571,4 +571,3 @@ _____
     <br>Example: <code42[33]</code>
   </p></li>
  </ul>
-
