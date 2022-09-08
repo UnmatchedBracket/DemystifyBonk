@@ -39,14 +39,14 @@ Packets that break this rule:
 <li><a href="#inc27">27: Change WL (Rounds)</a></li>
 <li><a href="#inc29">29: Map switch</a></li>
 <li><a href="#inc33">33: Map Suggest</a></li>
-<li><a href="#inc29">34: Map Suggest Client</a></li>
+<li><a href="#inc34">34: Map Suggest Client</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
 <li><a href="#inc40">43: Game starting Countdown</a></li>
 <li><a href="#inc44">44: Abort Countdown</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
-<li><a href="#inc58">59: Room Password Update</a></li> 
+<li><a href="#inc59">59: Room Password Update</a></li> 
 </ul>
 
 ### Outgoing
@@ -65,6 +65,10 @@ Packets that break this rule:
 <li><a href="#out21">21: send WL (Rounds)</a></li> 
 <li><a href="#out23">23: send Map Add</a></li> 
 <li><a href="#out26">26: change Other Team</a></li> 
+<li><a href="#out27">27: send Map Suggest</a></li> 
+<li><a href="#out29">29: send Balance</a></li> 
+<li><a href="#out32">32: send Team Settings Change</a></li> 
+<li><a href="#out33">33: send Arm Record</a></li> 
 </ul>
 
 _____
@@ -531,6 +535,40 @@ _____
       <li>'targetID': The Players ID of who you are moving</li></a>
       <li>'targetTeam': The team the person will be moved to. See <a href="#common_schemes">Common Scemes</a></li></a>
     </ol>
+  </p></li>
+  <li id="out27"><p>
+    27: send Map Suggest
+    <br>Example: <code42[27,{"m":"ILAMJAhBFBjBzCTlMiAHgEQCoCYCcAzgIYDqAHPAEakBiA7mecAMIC2tALlbgCYCMsfgDkAqtABqASRQo0wAA4ALGvgB2vABrDsEgKK0AykhYB2AFYBpFDMyz7SIA","mapname":"COolio mapio","mapauthor":"amogusSTAR"}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'m': The Map Data</li></a>
+      <li>'mapname': The Maps Name</li></a>
+      <li>'mapname': The Maps Author (Map Creator)</li></a>
+    </ol>
+  </p></li>
+  <li id="out29"><p>
+    29: send Balance
+    <br>Change a players nerf/buff
+    <br>Example: <code42[29,{"sid":2,"bal":-55}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>'sid': The Players ID of who you are adding the balance to</li></a>
+      <li>'bal': The balance amont</li></a>
+    </ol>
+  </p></li>
+  <li id="out32"><p>
+    32: send Team Settings Change
+    <br>Enable/Disable teams
+    <br>Example: <code42[32,{"t":true}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>"t": <code>true</code> if teams should be on, otherwise it should be <code>false</code>.</li>
+    </ol>
+  </p></li>
+  <li id="out33"><p>
+    33: send Arm Record
+    <br>Save a replay
+    <br>Example: <code42[33]</code>
   </p></li>
  </ul>
 
