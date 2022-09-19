@@ -78,6 +78,8 @@ Packets that break this rule:
 <li><a href="#out33">33: Send Arm Record</a></li> 
 <li><a href="#out34">34: Send Host Change</a></li> 
 <li><a href="#out35">35: Send Friended</a></li> 
+<li><a href="#out36">36: Send Start Countdown</a></li> 
+<li><a href="#out37">37: Send Abort Countdown</a></li> 
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
 </ul>
@@ -634,6 +636,19 @@ _____
     <ol type=1>
       <li>"id": The persons ID of who you are sending a friend request to</li>
     </ol>
+  </p></li>
+  <li id="out36"><p>
+    36: Send Start Countdown
+    <br>Send the message saying: Game Starting in X. 
+    <br>Example: <code>42[36,{"num":3}]</code>
+    <ol type=1>
+      <li>"num": The number in "Game starting in NUMBER...."</li>
+    </ol>
+  </p></li>
+   <li id="out37"><p>
+    37: Send Abort Countdown
+    <br>Send the message saying: countdown aboted
+    <br>Example: <code>42[37]</code>
   </p></li>
   <li id="out38"><p>
     38: Send Request Xp
