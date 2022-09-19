@@ -11,6 +11,10 @@ Packets that break this rule:
   <li><code>41</code>: WebSocket closed by server. This usually means you've been kicked from the lobby.</li>
 </ul>
 
+
+
+
+
 <span id="common_schemes"></span>
 ## Common Schemes
 ### Team
@@ -21,7 +25,7 @@ Packets that break this rule:
 ## Contents
 ### Incoming:
 <ul>
-<li><a href="#inc1">1: Update Pings</a></li>
+<li><a href="#inc1">1: Update Pings </a></li>
 <li><a href="#inc3">3: Room join</a></li>
 <li><a href="#inc4">4: Player join</a></li>
 <li><a href="#inc5">5: Player leave</a></li>
@@ -72,6 +76,15 @@ Packets that break this rule:
 <li><a href="#out34">34: Send Host Change</a></li> 
 </ul>
 
+$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+### Outgoing
+<ul>
+<li><a href="#debugout3">30: Get Debug</a></li> 
+<li><a href="#debugout30">30: Version Check</a></li> 
+<li><a href="#debugout31">31: Send Debug Winner</a></li> 
+<li><a href="#debugout45">45: Desync Test</a></li> 
+<li><a href="#debugout46">46: send Desync Res</a></li> 
+</ul>
 _____
 
 
@@ -574,9 +587,49 @@ _____
   <li id="out34"><p>
     34: Send Host Change
     <br>Give Host to someone
-    <br>Example: <code>42[34,{"id":1}]]</code>
+    <br>Example: <code>42[34,{"id":1}]</code>
     <ol type=1>
       <li>"id": The persons ID of who will be receiving host</li>
     </ol>
   </p></li>
+  <li id="debugout3"><p>
+    Possibly unused/Debug  Packet:
+    <br>3: Get Debug
+    <br>Example: <code>42[3]</code>
+  </p></li>
+  <li id="debugout30"><p>
+    Possibly unused/Debug  Packet:
+    <br>30: Version Check
+    <br>Example: <code>42[30]</code>
+  </p></li>
+  <li id="debugout31"><p>
+    Possibly unused/Debug  Packet:
+    <br>31: Send Debug Winner
+    <br>Example: <code>42[31,{"wid":0}]</code>
+    <ol type=1>
+      <li>"wid": Winner Id</li>
+    </ol>
+  </p></li>
+  <li id="debugout45"><p>
+    Possibly unused/Debug  Packet:
+    <br>45: Desync Test
+    <br>Test whether a player is desynced?
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"id": The players id to test whether they are desynced>?</li>
+      <li>"a": ?</li>
+    </ol>
+  </p></li>
+  <li id="debugout46"><p>
+    Possibly unused/Debug  Packet:
+    <br>46: send Desync Res
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"rid": ?</li>
+      <li>"sid": Player Id</li>
+      <li>"s": ?</li>
+      <li>"a": ?</li>
+    </ol>
+  </p></li>
+  
  </ul>
