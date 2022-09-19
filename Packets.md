@@ -55,6 +55,7 @@ Packets that break this rule:
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc59">59: Room Password Update</a></li> 
 </ul>
+
 ### Outgoing
 <ul>
 <li><a href="#out3">3: Send Inputs</a></li> 
@@ -81,7 +82,7 @@ Packets that break this rule:
 </ul>
 
 $${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
-### Outgoing
+### Outgoing Debug
 <ul>
 <li><a href="#debugout3">30: Get Debug</a></li> 
 <li><a href="#debugout30">30: Version Check</a></li> 
