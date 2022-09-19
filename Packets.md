@@ -78,7 +78,7 @@ Packets that break this rule:
 <li><a href="#out33">33: Send Arm Record</a></li> 
 <li><a href="#out34">34: Send Host Change</a></li> 
 <li><a href="#out35">35: Send Friended</a></li> 
-<li><a href="#out38">38: Send Request XP</a></li> 
+<li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
 </ul>
 
