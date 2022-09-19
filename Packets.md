@@ -45,14 +45,16 @@ Packets that break this rule:
 <li><a href="#inc33">33: Map Suggest</a></li>
 <li><a href="#inc34">34: Map Suggest Client</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
-<li><a href="#inc40">43: Game starting Countdown</a></li>
+<li><a href="#inc42">42: Friend Req</a></li>
+<li><a href="#inc43">43: Game starting Countdown</a></li>
 <li><a href="#inc44">44: Abort Countdown</a></li>
+<li><a href="#inc45">45: Player Leveled Up</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
+<li><a href="#inc49">49: Created Room</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc59">59: Room Password Update</a></li> 
 </ul>
-
 ### Outgoing
 <ul>
 <li><a href="#out3">3: Send Inputs</a></li> 
@@ -74,6 +76,8 @@ Packets that break this rule:
 <li><a href="#out32">32: Send Team Settings Change</a></li> 
 <li><a href="#out33">33: Send Arm Record</a></li> 
 <li><a href="#out34">34: Send Host Change</a></li> 
+<li><a href="#out35">35: Send Friended</a></li> 
+<li><a href="#out39">39: send Map Vote</a></li> 
 </ul>
 
 $${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
@@ -336,6 +340,14 @@ _____
       <li>The id of a player that tried to save replay</li>
     </ol>
   </p></li>
+  <li id="inc42"><p>
+    42: Friend Req
+    <br>Example: <code>42[42,1]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The id of a player that send you a friend request</li>
+    </ol>
+  </p></li>
   <li id="inc43"><p>
     43: Game Starting Countdown
     <br>Example: <code>42[43,3]</code>
@@ -344,10 +356,21 @@ _____
       <li>Countdown numberr</li>
     </ol>
   </p></li>
-  </p></li>
-    <li id="inc44"><p>
+  <li id="inc44"><p>
     44: Abort Countdown
     <br>Example: <code>42[44]</code>
+  </p></li>
+  <li id="inc45"><p>
+    45: Player Leveled Up
+    <br>Example: <code>42[45,{"sid":1,"lv":69}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>An object:
+      <ul>
+        <li>"sid": The Player that leveled up.</li>
+        <li>"lv": Their New Level.</li>
+      </ul>
+    </ol>
   </p></li>
   <li id="inc46"><p>
     46: Local Gained XP
@@ -360,6 +383,15 @@ _____
         <li>"newLevel" (only if you just leveled up): Your new level.</li>
         <li>"newToken" (only if you just leveled up): The new token to use when preforming operations. Unknown if the old token stops functioning.</li>
       </ul>
+    </ol>
+  </p></li>
+  <li id="inc49"><p>
+    49: created Room
+    <br>Example: <code>42[49,261254,"Password12345"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The new DBId for the room (Aka the id at the end of a invite link for example https://bonk.io/12345)</li>
+      <li>The room password if any. otherwise if no password this is ""</li>
     </ol>
   </p></li>
    <li id="inc52"><p>
@@ -592,7 +624,24 @@ _____
       <li>"id": The persons ID of who will be receiving host</li>
     </ol>
   </p></li>
-  <li id="debugout3"><p>
+  <li id="out35"><p>
+    35: Send Friended
+    <br>send a friend request to someone
+    <br>Example: <code>42[35,{"id":5}]</code>
+    <ol type=1>
+      <li>"id": The persons ID of who you are sending a friend request to</li>
+    </ol>
+  </p></li>
+  <li id="out39"><p>
+    39: Send Map Vote
+    <br>send a friend request to someone
+    <br>Example: <code>42[39,{"mapid":98062,"vote":1}]</code>
+    <ol type=1>
+      <li>"mapid": The Map ID you are voting</li>
+      <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
+    </ol>
+  </p></li>
+  <br><br><li id="debugout3"><p>
     Possibly unused/Debug  Packet:
     <br>3: Get Debug
     <br>Example: <code>42[3]</code>
