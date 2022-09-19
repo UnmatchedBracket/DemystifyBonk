@@ -641,7 +641,8 @@ _____
       <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
     </ol>
   </p></li>
-  <br><br><li id="debugout3"><p>
+  <br><br>$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+  <li id="debugout3"><p>
     Possibly unused/Debug  Packet:
     <br>3: Get Debug
     <br>Example: <code>42[3]</code>
