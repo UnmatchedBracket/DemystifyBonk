@@ -78,20 +78,21 @@ Packets that break this rule:
 <li><a href="#out33">33: Send Arm Record</a></li> 
 <li><a href="#out34">34: Send Host Change</a></li> 
 <li><a href="#out35">35: Send Friended</a></li> 
-<li><a href="#out39">39: send Map Vote</a></li> 
+<li><a href="#out38">38: Send Request XP</a></li> 
+<li><a href="#out39">39: Send Map Vote</a></li> 
 </ul>
 
 $${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
 ### Outgoing Debug
 <ul>
-<li><a href="#debugout3">30: Get Debug</a></li> 
+<li><a href="#debugout3">3: Get Debug</a></li> 
 <li><a href="#debugout30">30: Version Check</a></li> 
 <li><a href="#debugout31">31: Send Debug Winner</a></li> 
 <li><a href="#debugout45">45: Desync Test</a></li> 
-<li><a href="#debugout46">46: send Desync Res</a></li> 
+<li><a href="#debugout46">46: Send Desync Res</a></li> 
 </ul>
-_____
 
+_____
 
 ## Incoming
 
@@ -633,6 +634,11 @@ _____
       <li>"id": The persons ID of who you are sending a friend request to</li>
     </ol>
   </p></li>
+  <li id="out38"><p>
+    38: Send Request Xp
+    <br>This packet is usually send after a round. but sending this packet no matter while you are in the lobby or not will make you gain 100 xp
+    <br>Example: <code>42[38]</code>
+  </p></li>
   <li id="out39"><p>
     39: Send Map Vote
     <br>send a friend request to someone
@@ -673,7 +679,7 @@ _____
   </p></li>
   <li id="debugout46"><p>
     Possibly unused/Debug  Packet:
-    <br>46: send Desync Res
+    <br>46: Send Desync Res
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
       <li>"rid": ?</li>
