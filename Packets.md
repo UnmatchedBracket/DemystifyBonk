@@ -86,6 +86,7 @@ $${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$
 ### Outgoing Debug
 <ul>
 <li><a href="#debugout3">3: Get Debug</a></li> 
+<li><a href="#debugout8">8: Silence Player</a></li> 
 <li><a href="#debugout30">30: Version Check</a></li> 
 <li><a href="#debugout31">31: Send Debug Winner</a></li> 
 <li><a href="#debugout45">45: Desync Test</a></li> 
@@ -653,6 +654,16 @@ _____
     Possibly unused/Debug  Packet:
     <br>3: Get Debug
     <br>Example: <code>42[3]</code>
+  </p></li>
+  <li id="debugout8"><p>
+    Possibly unused/Debug  Packet:
+    <br>8: Silence Player
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"muteID": The Player you are muting?</li>
+      <li>"muteType": ?</li>
+      <li>"action":?</li>
+    </ol>
   </p></li>
   <li id="debugout30"><p>
     Possibly unused/Debug  Packet:
