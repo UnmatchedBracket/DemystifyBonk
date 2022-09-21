@@ -672,7 +672,7 @@ _____
     <br>Also known as AFK Status
     <br>Example: <code>42[44,{"out":true}]</code>
     <ol type=1>
-      <li>"tabbed": <code>true</code> to set your status asfocused on the tab, otherwise <code>false</code>.</li>
+      <li>"out": <code>true</code> to set your status as focused on the tab, otherwise <code>false</code>.</li>
     </ol>
   </p></li>
   <li id="out50"><p>
