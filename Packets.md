@@ -82,6 +82,8 @@ Packets that break this rule:
 <li><a href="#out37">37: Send Abort Countdown</a></li> 
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
+<li><a href="#out44">44: Tabbed</a></li> 
+<li><a href="#out50">50: Send No Host Swap</a></li> 
 </ul>
 
 $${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
@@ -316,7 +318,7 @@ _____
       <li>An encoded string containing the map. This format will likely be demystified in another file soon.</li>
     </ol>
   </p></li>
-    <li id="inc33"><p>
+  <li id="inc33"><p>
     33: Map Suggest
     <br> (Only host sees this packet other players see <a href="#inc34">Map Suggest Client</a> instead of this packet)
     <br>Example: <code>42[33,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA",2]</code>
@@ -326,7 +328,7 @@ _____
       <li>Player ID of player who suggested the map</li>
     </ol>
   </p></li>
-   <li id="inc34"><p>
+  <li id="inc34"><p>
     34: Map Suggest Client
     <br> (Host Sees <a href="#inc52">Map Suggest</a> instead of this packet)
     <br>Example: <code>42[34,"CDball","MuadDib",2]</code>
@@ -401,12 +403,13 @@ _____
   </p></li>
    <li id="inc52"><p>
     52: Tabbed
+    <br>Also known as AFK Status
     <br>Example: <code>42[52,3,false]</code>
     <br>Items:
     <ol type=1>
       <li>Player id of person who tabbed in/out</li>
-      <li><code>true</code> if player tabbed in, <code>false</code> if player tabbed out</li>
-    </ol>
+      <li><code>true</code> if the player is not focused on the tab, otherwise <code>false</code>.</li>
+  </ol>
   </p></li>
   <li id="inc58"><p>
     58: Room Name Update 
@@ -451,7 +454,7 @@ _____
       </li>
     </ol>
   </p></li>
-   <li id="out5"><p>
+  <li id="out5"><p>
     5: Trigger Start
     <br>Start the game as a host
     <br>Example: <code>42[5,{"is":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}}]</code>
@@ -664,6 +667,19 @@ _____
       <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
     </ol>
   </p></li>
+  <li id="out44"><p>
+    44: tabbed
+    <br>Also known as AFK Status
+    <br>Example: <code>42[44,{"out":true}]</code>
+    <ol type=1>
+      <li>"tabbed": <code>true</code> to set your status asfocused on the tab, otherwise <code>false</code>.</li>
+    </ol>
+  </p></li>
+  <li id="out50"><p>
+    50: send No Host Swap
+    <br>Makes it so that when the host leaves the room the room ends.
+    <br>Example: <code>42[50]</code>
+  </p></li>
   <br><br>$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
   <li id="debugout3"><p>
     Possibly unused/Debug  Packet:
@@ -714,5 +730,4 @@ _____
       <li>"a": ?</li>
     </ol>
   </p></li>
-  
  </ul>
