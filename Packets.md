@@ -25,7 +25,7 @@ Packets that break this rule:
 ## Contents
 ### Incoming:
 <ul>
-<li><a href="#inc1">1: Update Pings </a></li>
+<li><a href="#inc1">1: Update Pings</a></li>
 <li><a href="#inc3">3: Room join</a></li>
 <li><a href="#inc4">4: Player join</a></li>
 <li><a href="#inc5">5: Player leave</a></li>
@@ -50,7 +50,7 @@ Packets that break this rule:
 <li><a href="#inc44">44: Abort Countdown</a></li>
 <li><a href="#inc45">45: Player Leveled Up</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
-<li><a href="#inc49">49: Created Room</a></li>
+<li><a href="#inc49">49: Created Room Share Link</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc59">59: Room Password Update</a></li> 
@@ -85,9 +85,9 @@ Packets that break this rule:
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
 </ul>
-
-$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+	
 ### Outgoing Debug
+*Possibly unused/Debug Outgoing Packets*
 <ul>
 <li><a href="#debugout3">3: Get Debug</a></li> 
 <li><a href="#debugout8">8: Silence Player</a></li> 
@@ -394,11 +394,11 @@ _____
   </p></li>
   <li id="inc49"><p>
     49: created Room
-    <br>Example: <code>42[49,261254,"Password12345"]</code>
+    <br>Example: <code>42[49,261254,"agsey"]</code>
     <br>Items:
     <ol type=1>
       <li>The new DBId for the room (Aka the id at the end of a invite link for example https://bonk.io/12345)</li>
-      <li>The room password if any. otherwise if no password this is ""</li>
+      <li>The room bypass, if any. Otherwise, this is "".</li>
     </ol>
   </p></li>
    <li id="inc52"><p>
@@ -408,7 +408,7 @@ _____
     <br>Items:
     <ol type=1>
       <li>Player id of person who tabbed in/out</li>
-      <li><code>true</code> if the player is not focused on the tab, otherwise <code>false</code>.</li>
+      <li><code>false</code> if the player is now focused on the tab, otherwise <code>true</code>.</li>
   </ol>
   </p></li>
   <li id="inc58"><p>
@@ -676,19 +676,18 @@ _____
     </ol>
   </p></li>
   <li id="out50"><p>
-    50: send No Host Swap
-    <br>Makes it so that when the host leaves the room the room ends.
+    50: No Host Swap
+    <br>Makes it so that when the host leaves the room, the room ends.
     <br>Example: <code>42[50]</code>
   </p></li>
-  <br><br>$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+  <br><br>
+  <i>Possibly unused/Debug Outgoing Packets</i>
   <li id="debugout3"><p>
-    Possibly unused/Debug  Packet:
-    <br>3: Get Debug
+    3: Get Debug
     <br>Example: <code>42[3]</code>
   </p></li>
   <li id="debugout8"><p>
-    Possibly unused/Debug  Packet:
-    <br>8: Silence Player
+    8: Silence Player
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
       <li>"muteID": The Player you are muting?</li>
@@ -697,21 +696,18 @@ _____
     </ol>
   </p></li>
   <li id="debugout30"><p>
-    Possibly unused/Debug  Packet:
-    <br>30: Version Check
+    30: Version Check
     <br>Example: <code>42[30]</code>
   </p></li>
   <li id="debugout31"><p>
-    Possibly unused/Debug  Packet:
-    <br>31: Send Debug Winner
+    31: Send Debug Winner
     <br>Example: <code>42[31,{"wid":0}]</code>
     <ol type=1>
       <li>"wid": Winner Id</li>
     </ol>
   </p></li>
   <li id="debugout45"><p>
-    Possibly unused/Debug  Packet:
-    <br>45: Desync Test
+    45: Desync Test
     <br>Test whether a player is desynced?
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
@@ -720,8 +716,7 @@ _____
     </ol>
   </p></li>
   <li id="debugout46"><p>
-    Possibly unused/Debug  Packet:
-    <br>46: Send Desync Res
+    46: Send Desync Res
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
       <li>"rid": ?</li>
