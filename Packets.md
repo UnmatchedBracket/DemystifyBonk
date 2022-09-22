@@ -11,6 +11,10 @@ Packets that break this rule:
   <li><code>41</code>: WebSocket closed by server. This usually means you've been kicked from the lobby.</li>
 </ul>
 
+
+
+
+
 <span id="common_schemes"></span>
 ## Common Schemes
 ### Team
@@ -21,7 +25,7 @@ Packets that break this rule:
 ## Contents
 ### Incoming:
 <ul>
-<li><a href="#inc1">1: Update Pings</a></li>
+<li><a href="#inc1">1: Update Pings </a></li>
 <li><a href="#inc3">3: Room join</a></li>
 <li><a href="#inc4">4: Player join</a></li>
 <li><a href="#inc5">5: Player leave</a></li>
@@ -41,9 +45,12 @@ Packets that break this rule:
 <li><a href="#inc33">33: Map Suggest</a></li>
 <li><a href="#inc34">34: Map Suggest Client</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
-<li><a href="#inc40">43: Game starting Countdown</a></li>
+<li><a href="#inc42">42: Friend Req</a></li>
+<li><a href="#inc43">43: Game starting Countdown</a></li>
 <li><a href="#inc44">44: Abort Countdown</a></li>
+<li><a href="#inc45">45: Player Leveled Up</a></li>
 <li><a href="#inc46">46: Local Gained XP</a></li>
+<li><a href="#inc49">49: Created Room</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc59">59: Room Password Update</a></li> 
@@ -70,10 +77,27 @@ Packets that break this rule:
 <li><a href="#out32">32: Send Team Settings Change</a></li> 
 <li><a href="#out33">33: Send Arm Record</a></li> 
 <li><a href="#out34">34: Send Host Change</a></li> 
+<li><a href="#out35">35: Send Friended</a></li> 
+<li><a href="#out36">36: Send Start Countdown</a></li> 
+<li><a href="#out37">37: Send Abort Countdown</a></li> 
+<li><a href="#out38">38: Send Req XP</a></li> 
+<li><a href="#out39">39: Send Map Vote</a></li> 
+<li><a href="#out44">44: Tabbed</a></li> 
+<li><a href="#out50">50: Send No Host Swap</a></li> 
+</ul>
+
+$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+### Outgoing Debug
+<ul>
+<li><a href="#debugout3">3: Get Debug</a></li> 
+<li><a href="#debugout8">8: Silence Player</a></li> 
+<li><a href="#debugout30">30: Version Check</a></li> 
+<li><a href="#debugout31">31: Send Debug Winner</a></li> 
+<li><a href="#debugout45">45: Desync Test</a></li> 
+<li><a href="#debugout46">46: Send Desync Res</a></li> 
 </ul>
 
 _____
-
 
 ## Incoming
 
@@ -294,7 +318,7 @@ _____
       <li>An encoded string containing the map. This format will likely be demystified in another file soon.</li>
     </ol>
   </p></li>
-    <li id="inc33"><p>
+  <li id="inc33"><p>
     33: Map Suggest
     <br> (Only host sees this packet other players see <a href="#inc34">Map Suggest Client</a> instead of this packet)
     <br>Example: <code>42[33,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA",2]</code>
@@ -304,7 +328,7 @@ _____
       <li>Player ID of player who suggested the map</li>
     </ol>
   </p></li>
-   <li id="inc34"><p>
+  <li id="inc34"><p>
     34: Map Suggest Client
     <br> (Host Sees <a href="#inc52">Map Suggest</a> instead of this packet)
     <br>Example: <code>42[34,"CDball","MuadDib",2]</code>
@@ -323,6 +347,14 @@ _____
       <li>The id of a player that tried to save replay</li>
     </ol>
   </p></li>
+  <li id="inc42"><p>
+    42: Friend Req
+    <br>Example: <code>42[42,1]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The id of a player that send you a friend request</li>
+    </ol>
+  </p></li>
   <li id="inc43"><p>
     43: Game Starting Countdown
     <br>Example: <code>42[43,3]</code>
@@ -331,10 +363,21 @@ _____
       <li>Countdown numberr</li>
     </ol>
   </p></li>
-  </p></li>
-    <li id="inc44"><p>
+  <li id="inc44"><p>
     44: Abort Countdown
     <br>Example: <code>42[44]</code>
+  </p></li>
+  <li id="inc45"><p>
+    45: Player Leveled Up
+    <br>Example: <code>42[45,{"sid":1,"lv":69}]</code>
+    <br>Items:
+    <ol type=1>
+      <li>An object:
+      <ul>
+        <li>"sid": The Player that leveled up.</li>
+        <li>"lv": Their New Level.</li>
+      </ul>
+    </ol>
   </p></li>
   <li id="inc46"><p>
     46: Local Gained XP
@@ -349,14 +392,24 @@ _____
       </ul>
     </ol>
   </p></li>
+  <li id="inc49"><p>
+    49: created Room
+    <br>Example: <code>42[49,261254,"Password12345"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The new DBId for the room (Aka the id at the end of a invite link for example https://bonk.io/12345)</li>
+      <li>The room password if any. otherwise if no password this is ""</li>
+    </ol>
+  </p></li>
    <li id="inc52"><p>
     52: Tabbed
+    <br>Also known as AFK Status
     <br>Example: <code>42[52,3,false]</code>
     <br>Items:
     <ol type=1>
       <li>Player id of person who tabbed in/out</li>
-      <li><code>true</code> if player tabbed in, <code>false</code> if player tabbed out</li>
-    </ol>
+      <li><code>true</code> if the player is not focused on the tab, otherwise <code>false</code>.</li>
+  </ol>
   </p></li>
   <li id="inc58"><p>
     58: Room Name Update 
@@ -401,7 +454,7 @@ _____
       </li>
     </ol>
   </p></li>
-   <li id="out5"><p>
+  <li id="out5"><p>
     5: Trigger Start
     <br>Start the game as a host
     <br>Example: <code>42[5,{"is":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":3,"q":false,"tl":false,"tea":false,"ga":"b","mo":"b","bal":[]}}]</code>
@@ -574,9 +627,107 @@ _____
   <li id="out34"><p>
     34: Send Host Change
     <br>Give Host to someone
-    <br>Example: <code>42[34,{"id":1}]]</code>
+    <br>Example: <code>42[34,{"id":1}]</code>
     <ol type=1>
       <li>"id": The persons ID of who will be receiving host</li>
+    </ol>
+  </p></li>
+  <li id="out35"><p>
+    35: Send Friended
+    <br>send a friend request to someone
+    <br>Example: <code>42[35,{"id":5}]</code>
+    <ol type=1>
+      <li>"id": The persons ID of who you are sending a friend request to</li>
+    </ol>
+  </p></li>
+  <li id="out36"><p>
+    36: Send Start Countdown
+    <br>Send the message saying: Game Starting in X. 
+    <br>Example: <code>42[36,{"num":3}]</code>
+    <ol type=1>
+      <li>"num": The number in "Game starting in NUMBER...."</li>
+    </ol>
+  </p></li>
+   <li id="out37"><p>
+    37: Send Abort Countdown
+    <br>Send the message saying: countdown aboted
+    <br>Example: <code>42[37]</code>
+  </p></li>
+  <li id="out38"><p>
+    38: Send Request Xp
+    <br>This packet is usually send after a round. but sending this packet no matter while you are in the lobby or not will make you gain 100 xp
+    <br>Example: <code>42[38]</code>
+  </p></li>
+  <li id="out39"><p>
+    39: Send Map Vote
+    <br>send a friend request to someone
+    <br>Example: <code>42[39,{"mapid":98062,"vote":1}]</code>
+    <ol type=1>
+      <li>"mapid": The Map ID you are voting</li>
+      <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
+    </ol>
+  </p></li>
+  <li id="out44"><p>
+    44: tabbed
+    <br>Also known as AFK Status
+    <br>Example: <code>42[44,{"out":true}]</code>
+    <ol type=1>
+      <li>"out": <code>true</code> to set your status as focused on the tab, otherwise <code>false</code>.</li>
+    </ol>
+  </p></li>
+  <li id="out50"><p>
+    50: send No Host Swap
+    <br>Makes it so that when the host leaves the room the room ends.
+    <br>Example: <code>42[50]</code>
+  </p></li>
+  <br><br>$${\color{red}Possibly \space unused/Debug \space Outgoing \space Packets}$$	
+  <li id="debugout3"><p>
+    Possibly unused/Debug  Packet:
+    <br>3: Get Debug
+    <br>Example: <code>42[3]</code>
+  </p></li>
+  <li id="debugout8"><p>
+    Possibly unused/Debug  Packet:
+    <br>8: Silence Player
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"muteID": The Player you are muting?</li>
+      <li>"muteType": ?</li>
+      <li>"action":?</li>
+    </ol>
+  </p></li>
+  <li id="debugout30"><p>
+    Possibly unused/Debug  Packet:
+    <br>30: Version Check
+    <br>Example: <code>42[30]</code>
+  </p></li>
+  <li id="debugout31"><p>
+    Possibly unused/Debug  Packet:
+    <br>31: Send Debug Winner
+    <br>Example: <code>42[31,{"wid":0}]</code>
+    <ol type=1>
+      <li>"wid": Winner Id</li>
+    </ol>
+  </p></li>
+  <li id="debugout45"><p>
+    Possibly unused/Debug  Packet:
+    <br>45: Desync Test
+    <br>Test whether a player is desynced?
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"id": The players id to test whether they are desynced>?</li>
+      <li>"a": ?</li>
+    </ol>
+  </p></li>
+  <li id="debugout46"><p>
+    Possibly unused/Debug  Packet:
+    <br>46: Send Desync Res
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>"rid": ?</li>
+      <li>"sid": Player Id</li>
+      <li>"s": ?</li>
+      <li>"a": ?</li>
     </ol>
   </p></li>
  </ul>
