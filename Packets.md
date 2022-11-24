@@ -68,7 +68,7 @@ Packets that break this rule:
 <li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
-<li><a href="#out20">20: Send GAMO</a></li> 
+<li><a href="#out20">20: Send Mode</a></li> 
 <li><a href="#out21">21: Send WL (Rounds)</a></li> 
 <li><a href="#out23">23: Send Map Add</a></li> 
 <li><a href="#out26">26: Change Other Team</a></li> 
@@ -547,8 +547,8 @@ _____
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
   <li id="out20"><p>
-    20: Send GAMO
-    <br>packet Send to change the rooms mode
+    20: Send Mode
+    <br>Changes the room's mode
     <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]	</code>
     <br>Items:
     <ol type=1>
@@ -567,7 +567,7 @@ _____
   </p></li>
   <li id="out21"><p>
     21: Send WL (Rounds)
-    <br>set the amount of rounds to win (Win/Lose)
+    <br>Sets the amount of rounds to win
     <br>Example: <code>42[21,{"w":6}]	</code>
     <br>Items:
     <ol type=1>
