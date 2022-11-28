@@ -58,18 +58,20 @@ Packets that break this rule:
 
 ### Outgoing
 <ul>
-<li><a href="#out3">3: Send Inputs</a></li> 
+<li><a href="#out4">4: Send Inputs</a></li> 
 <li><a href="#out5">5: Trigger Start</a></li> 
 <li><a href="#out6">6: Change Own Team</a></li> 
 <li><a href="#out7">7: Team Lock</a></li> 
-<li><a href="#out9">9: Ban Player</a></li> 
+<li><a href="#out9">9: Kick/Ban Player</a></li> 
 <li><a href="#out10">10: Chat Message</a></li>
 <li><a href="#out11">11: Inform In Lobby</a></li> 
 <li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
+<li><a href="#out19">19: Send Map Reorder</a></li> 
 <li><a href="#out20">20: Send Mode</a></li> 
 <li><a href="#out21">21: Send WL (Rounds)</a></li> 
+<li><a href="#out22">22: Send Map Delete</a></li> 
 <li><a href="#out23">23: Send Map Add</a></li> 
 <li><a href="#out26">26: Change Other Team</a></li> 
 <li><a href="#out27">27: Send Map Suggest</a></li> 
@@ -82,6 +84,7 @@ Packets that break this rule:
 <li><a href="#out37">37: Send Abort Countdown</a></li> 
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
+<li><a href="#out39">40: Inform In Game</a></li> 
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
 </ul>
@@ -436,8 +439,8 @@ _____
 ## Outgoing
 
 <ul>
-  <li id="out3"><p>
-    3: Send Inputs 
+  <li id="out4"><p>
+    4: Send Inputs 
     <br>Examples:
     <ul>
       <li><code>42[4,{"i":38,"f":324,"c":45}]</code></li>
@@ -481,11 +484,12 @@ _____
     </ol>
   </p></li>
   <li id="out9"><p>
-    9: Ban Player
+    9: Kick/Ban Player
     <br>Example: <code>42[9,{"banshortid":6}]</code>
     <br>Items:
     <ol type=1>
       <li>'banshortid': The player's ID.</li></a>
+      <li>'kickonly': Whether the player can join back after being kicked <code>true</code> the player will be able to join back <code>false</code> the player wont be able to join back</li></a>
     </ol>
   </p></li>
   <li id="out10"><p>
@@ -546,6 +550,16 @@ _____
     <ol type=1>
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
+  <li id="out19"><p>
+    19: Send Map Reorder
+    <br>Needs documentation
+    <br>Example: No Example</code>
+    <br>Items:
+    <ol type=1>
+      <li>"s": ?</li>
+      <li>"e": ?</li>
+    </ol>
+  </p></li>
   <li id="out20"><p>
     20: Send Mode
     <br>Changes the room's mode
@@ -572,6 +586,14 @@ _____
     <br>Items:
     <ol type=1>
       <li>"w": The amount of rounds</ol>
+  </p></li>
+  <li id="out22"><p>
+    23: Send Map Delete
+    <br>Needs Documentation
+    <br>Example: No Example
+    <br>Items:
+    <ol type=1>
+      <li>"d": ?</ol>
   </p></li>
   <li id="out23"><p>
     23: Send Map Add
@@ -667,8 +689,17 @@ _____
       <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
     </ol>
   </p></li>
+  <li id="out40"><p>
+    40: Inform In Game
+    <br>Needs documentation
+    <br>Example: No Example Available</code>
+    <ol type=1>
+      <li>"sid": ?</li>
+      <li>"allData": ?</li>
+    </ol>
+  </p></li>
   <li id="out44"><p>
-    44: tabbed
+    44: Tabbed
     <br>Also known as AFK Status
     <br>Example: <code>42[44,{"out":true}]</code>
     <ol type=1>
