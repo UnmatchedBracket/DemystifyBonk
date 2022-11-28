@@ -68,6 +68,7 @@ Packets that break this rule:
 <li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
+<li><a href="#out17">17: All Ready Resety</a></li> 
 <li><a href="#out19">19: Send Map Reorder</a></li> 
 <li><a href="#out20">20: Send Mode</a></li> 
 <li><a href="#out21">21: Send WL (Rounds)</a></li> 
@@ -85,6 +86,7 @@ Packets that break this rule:
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
 <li><a href="#out39">40: Inform In Game</a></li> 
+<li><a href="#out41">41  Get Pre Vote</a></li> 
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
 </ul>
@@ -94,6 +96,7 @@ Packets that break this rule:
 <ul>
 <li><a href="#debugout3">3: Get Debug</a></li> 
 <li><a href="#debugout8">8: Silence Player</a></li> 
+<li><a href="#debugout24">24: Send Typing</a></li> 
 <li><a href="#debugout30">30: Version Check</a></li> 
 <li><a href="#debugout31">31: Send Debug Winner</a></li> 
 <li><a href="#debugout45">45: Desync Test</a></li> 
@@ -244,6 +247,7 @@ _____
         <li>rate_limit_sma: You changed the map too quickly.</li>
         <li>rate_limit_cot: You changed teams too quickly.</li>
         <li>rate_limit_sgt: You changed modes too quickly</li>
+	<li>rate_limit_pong: ?</li>
         <li>rate_limit_tl: You locked the teams too quickly</li>
         <li>rate_limit: Generic rate-limit. You did something too fast.</li>
         <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
@@ -535,6 +539,7 @@ _____
       <li>'mode': Room mode. Can consist of these options: <code>bonkquick</code>,<code>arrowsquick</code>,<code>grapplequick</code>,<code>custom</code> </li></a>
       <li>'guestName': What your guestname would be if guest is is set to true</li></a>
       <li>'avatar': Your skin data</li></a>
+      <li>'game': This should only be added when you want to create a room for supercarstadium. and in that case you want game to be "car"</li></a>
     </ol>
   </p></li>
     <li id="out14"><p>
@@ -550,6 +555,11 @@ _____
     <ol type=1>
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
+  <li id="out17"><p>
+    17: All Ready Reset
+    <br>The host can send this packet to set everyones ready status to false
+    <br>Example: <code>42[17]</code>
+  </li>
   <li id="out19"><p>
     19: Send Map Reorder
     <br>Needs documentation
@@ -599,7 +609,7 @@ _____
   <li id="out23"><p>
     23: Send Map Add
     <br>Change the current map
-    <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}] </code>
+    <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}]</code>
     <br>Items:
     <ol type=1>
       <li>"m": The Map Data</ol>
@@ -699,6 +709,14 @@ _____
       <li>"allData": ?</li>
     </ol>
   </p></li>
+  <li id="out41"><p>
+    41: get Pre Vote
+    <br>This packet is send upon a map starting. Needs documentation
+    <br>Example: 42[41,{"mapid":831011}]</code>
+    <ol type=1>
+      <li>"mapid": The map id of the map that started</li>
+    </ol>
+  </p></li>
   <li id="out44"><p>
     44: Tabbed
     <br>Also known as AFK Status
@@ -726,6 +744,10 @@ _____
       <li>"muteType": ?</li>
       <li>"action":?</li>
     </ol>
+  </p></li>
+  <li id="debugout24"><p>
+    24: Send Typing
+    <br>Example: <code>NO EXAMPLE</code>
   </p></li>
   <li id="debugout30"><p>
     30: Version Check
