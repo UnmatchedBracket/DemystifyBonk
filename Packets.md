@@ -563,7 +563,7 @@ _____
   <li id="out20"><p>
     20: Send Mode
     <br>Changes the room's mode
-    <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]	</code>
+    <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]</code>
     <br>Items:
     <ol type=1>
       <li>'ga': The 'engine' for this mode. Known engines are "b" for most modes and "f" for Football.</li>
@@ -582,7 +582,7 @@ _____
   <li id="out21"><p>
     21: Send WL (Rounds)
     <br>Sets the amount of rounds to win
-    <br>Example: <code>42[21,{"w":6}]	</code>
+    <br>Example: <code>42[21,{"w":6}]</code>
     <br>Items:
     <ol type=1>
       <li>"w": The amount of rounds</ol>
@@ -593,8 +593,9 @@ _____
     <br>Example: No Example
     <br>Items:
     <ol type=1>
-      <li>"d": ?</ol>
-  </p></li>
+      <li>"d": ?</li>
+    </ol>
+  </p>
   <li id="out23"><p>
     23: Send Map Add
     <br>Change the current map
@@ -644,7 +645,7 @@ _____
   <li id="out33"><p>
     33: Send Arm Record
     <br>Save a replay
-    <br>Example: <code42[33]</code>
+    <br>Example: <code>42[33]</code>
   </p></li>
   <li id="out34"><p>
     34: Send Host Change
