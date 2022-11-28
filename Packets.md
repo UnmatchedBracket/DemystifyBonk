@@ -68,7 +68,7 @@ Packets that break this rule:
 <li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
-<li><a href="#out17">17: All Ready Resety</a></li> 
+<li><a href="#out17">17: All Ready Reset</a></li> 
 <li><a href="#out19">19: Send Map Reorder</a></li> 
 <li><a href="#out20">20: Send Mode</a></li> 
 <li><a href="#out21">21: Send WL (Rounds)</a></li> 
@@ -518,8 +518,8 @@ _____
   <li id="out12"><p>
     12: Create Room
     <br>packet send to create a room
-    <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
-   <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
+    <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":45,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
+   <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":45,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
     <br>Items:
     <ol type=1>
       <li>'peerID': Your peer id</li>
@@ -533,7 +533,7 @@ _____
       <li>'latitude': latitude of your where your room is located</li></a>
       <li>'longitude': longitude of your where your room is located</li></a>
       <li>'country': The country code for your room</li></a>
-      <li>'version': Bonk.io Version? </li></a>
+      <li>'version': Bonk.io Version</li></a>
       <li>'hidden': Whether the room shows up in the room list</li></a>
       <li>'quick': Whether the room should be created in quickplay</li></a>
       <li>'mode': Room mode. Can consist of these options: <code>bonkquick</code>,<code>arrowsquick</code>,<code>grapplequick</code>,<code>custom</code> </li></a>
@@ -703,9 +703,9 @@ _____
   <li id="out40"><p>
     40: Inform In Game
     <br>Needs documentation
-    <br>Example: No Example Available</code>
+    <br>Example: <code>42[40,{"sid":1,"allData":{"state":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","stateID":1,"fc":7,"inputs":[],"admin":[],"gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":9,"q":"custom","tl":false,"tea":false,"ga":"b","mo":"sp","bal":]},"random":[]}}]</code>
     <ol type=1>
-      <li>"sid": ?</li>
+      <li>"sid": Which player to inform about the ingame data</li>
       <li>"allData": ?</li>
     </ol>
   </p></li>
