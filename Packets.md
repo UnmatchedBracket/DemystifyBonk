@@ -58,18 +58,21 @@ Packets that break this rule:
 
 ### Outgoing
 <ul>
-<li><a href="#out3">3: Send Inputs</a></li> 
+<li><a href="#out4">4: Send Inputs</a></li> 
 <li><a href="#out5">5: Trigger Start</a></li> 
 <li><a href="#out6">6: Change Own Team</a></li> 
 <li><a href="#out7">7: Team Lock</a></li> 
-<li><a href="#out9">9: Ban Player</a></li> 
+<li><a href="#out9">9: Kick/Ban Player</a></li> 
 <li><a href="#out10">10: Chat Message</a></li>
 <li><a href="#out11">11: Inform In Lobby</a></li> 
 <li><a href="#out12">12: Create Room</a></li> 
 <li><a href="#out14">14: Return To Lobby</a></li> 
 <li><a href="#out16">16: Set Ready</a></li> 
+<li><a href="#out17">17: All Ready Reset</a></li> 
+<li><a href="#out19">19: Send Map Reorder</a></li> 
 <li><a href="#out20">20: Send Mode</a></li> 
 <li><a href="#out21">21: Send WL (Rounds)</a></li> 
+<li><a href="#out22">22: Send Map Delete</a></li> 
 <li><a href="#out23">23: Send Map Add</a></li> 
 <li><a href="#out26">26: Change Other Team</a></li> 
 <li><a href="#out27">27: Send Map Suggest</a></li> 
@@ -82,6 +85,8 @@ Packets that break this rule:
 <li><a href="#out37">37: Send Abort Countdown</a></li> 
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
+<li><a href="#out39">40: Inform In Game</a></li> 
+<li><a href="#out41">41  Get Pre Vote</a></li> 
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
 </ul>
@@ -91,6 +96,7 @@ Packets that break this rule:
 <ul>
 <li><a href="#debugout3">3: Get Debug</a></li> 
 <li><a href="#debugout8">8: Silence Player</a></li> 
+<li><a href="#debugout24">24: Send Typing</a></li> 
 <li><a href="#debugout30">30: Version Check</a></li> 
 <li><a href="#debugout31">31: Send Debug Winner</a></li> 
 <li><a href="#debugout45">45: Desync Test</a></li> 
@@ -241,6 +247,7 @@ _____
         <li>rate_limit_sma: You changed the map too quickly.</li>
         <li>rate_limit_cot: You changed teams too quickly.</li>
         <li>rate_limit_sgt: You changed modes too quickly</li>
+	<li>rate_limit_pong: ?</li>
         <li>rate_limit_tl: You locked the teams too quickly</li>
         <li>rate_limit: Generic rate-limit. You did something too fast.</li>
         <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
@@ -436,8 +443,8 @@ _____
 ## Outgoing
 
 <ul>
-  <li id="out3"><p>
-    3: Send Inputs 
+  <li id="out4"><p>
+    4: Send Inputs 
     <br>Examples:
     <ul>
       <li><code>42[4,{"i":38,"f":324,"c":45}]</code></li>
@@ -481,11 +488,12 @@ _____
     </ol>
   </p></li>
   <li id="out9"><p>
-    9: Ban Player
+    9: Kick/Ban Player
     <br>Example: <code>42[9,{"banshortid":6}]</code>
     <br>Items:
     <ol type=1>
       <li>'banshortid': The player's ID.</li></a>
+      <li>'kickonly': Whether the player can join back after being kicked <code>true</code> the player will be able to join back <code>false</code> the player wont be able to join back</li></a>
     </ol>
   </p></li>
   <li id="out10"><p>
@@ -510,8 +518,8 @@ _____
   <li id="out12"><p>
     12: Create Room
     <br>packet send to create a room
-    <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
-   <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":44,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
+    <br>Example: When Logged in: <code>42[12,{"peerID":"ht1a3nt5tgc00000","roomName":"Showcase's game","maxPlayers":6,"password":"","dbid":12741896,"guest":false,"minLevel":0,"maxLevel":999,"latitude":420.911,"longitude":0.69,"country":"CN","version":45,"hidden":0,"quick":false,"mode":"custom","token":"TOKENHERE","avatar":{"layers":[],"bc":4492031}}]</code><br>
+   <br>Example: When Logged out: <code>42[12,{"peerID":"b6sg533lh1v00000","roomName":"net's game","maxPlayers":6,"password":"","dbid":12741896,"guest":true,"minLevel":0,"maxLevel":999,"latitude":666.0,"longitude":0.1234,"country":"CN","version":45,"hidden":0,"quick":false,"mode":"custom","guestName":"net","avatar":{"layers":[],"bc":12634675}}]</code>
     <br>Items:
     <ol type=1>
       <li>'peerID': Your peer id</li>
@@ -525,12 +533,13 @@ _____
       <li>'latitude': latitude of your where your room is located</li></a>
       <li>'longitude': longitude of your where your room is located</li></a>
       <li>'country': The country code for your room</li></a>
-      <li>'version': Bonk.io Version? </li></a>
+      <li>'version': Bonk.io Version</li></a>
       <li>'hidden': Whether the room shows up in the room list</li></a>
       <li>'quick': Whether the room should be created in quickplay</li></a>
       <li>'mode': Room mode. Can consist of these options: <code>bonkquick</code>,<code>arrowsquick</code>,<code>grapplequick</code>,<code>custom</code> </li></a>
       <li>'guestName': What your guestname would be if guest is is set to true</li></a>
       <li>'avatar': Your skin data</li></a>
+      <li>'game': This should only be added when you want to create a room for supercarstadium. and in that case you want game to be "car"</li></a>
     </ol>
   </p></li>
     <li id="out14"><p>
@@ -546,10 +555,25 @@ _____
     <ol type=1>
       <li>"ready": <code>true</code> if you want to have be ready (have a checkmark), otherwise <code>false</code>.    </ol>
   </p></li>
+  <li id="out17"><p>
+    17: All Ready Reset
+    <br>The host can send this packet to set everyones ready status to false
+    <br>Example: <code>42[17]</code>
+  </li>
+  <li id="out19"><p>
+    19: Send Map Reorder
+    <br>Needs documentation
+    <br>Example: No Example</code>
+    <br>Items:
+    <ol type=1>
+      <li>"s": ?</li>
+      <li>"e": ?</li>
+    </ol>
+  </p></li>
   <li id="out20"><p>
     20: Send Mode
     <br>Changes the room's mode
-    <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]	</code>
+    <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]</code>
     <br>Items:
     <ol type=1>
       <li>'ga': The 'engine' for this mode. Known engines are "b" for most modes and "f" for Football.</li>
@@ -568,15 +592,24 @@ _____
   <li id="out21"><p>
     21: Send WL (Rounds)
     <br>Sets the amount of rounds to win
-    <br>Example: <code>42[21,{"w":6}]	</code>
+    <br>Example: <code>42[21,{"w":6}]</code>
     <br>Items:
     <ol type=1>
       <li>"w": The amount of rounds</ol>
   </p></li>
+  <li id="out22"><p>
+    23: Send Map Delete
+    <br>Needs Documentation
+    <br>Example: No Example
+    <br>Items:
+    <ol type=1>
+      <li>"d": ?</li>
+    </ol>
+  </p>
   <li id="out23"><p>
     23: Send Map Add
     <br>Change the current map
-    <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}] </code>
+    <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}]</code>
     <br>Items:
     <ol type=1>
       <li>"m": The Map Data</ol>
@@ -622,7 +655,7 @@ _____
   <li id="out33"><p>
     33: Send Arm Record
     <br>Save a replay
-    <br>Example: <code42[33]</code>
+    <br>Example: <code>42[33]</code>
   </p></li>
   <li id="out34"><p>
     34: Send Host Change
@@ -667,8 +700,25 @@ _____
       <li>"vote": The type of vote. 1 for thumbs up, 0 for thumbs down</li>
     </ol>
   </p></li>
+  <li id="out40"><p>
+    40: Inform In Game
+    <br>Needs documentation
+    <br>Example: <code>42[40,{"sid":1,"allData":{"state":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","stateID":1,"fc":7,"inputs":[],"admin":[],"gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":9,"q":"custom","tl":false,"tea":false,"ga":"b","mo":"sp","bal":]},"random":[]}}]</code>
+    <ol type=1>
+      <li>"sid": Which player to inform about the ingame data</li>
+      <li>"allData": ?</li>
+    </ol>
+  </p></li>
+  <li id="out41"><p>
+    41: get Pre Vote
+    <br>This packet is send upon a map starting. Needs documentation
+    <br>Example: 42[41,{"mapid":831011}]</code>
+    <ol type=1>
+      <li>"mapid": The map id of the map that started</li>
+    </ol>
+  </p></li>
   <li id="out44"><p>
-    44: tabbed
+    44: Tabbed
     <br>Also known as AFK Status
     <br>Example: <code>42[44,{"out":true}]</code>
     <ol type=1>
@@ -694,6 +744,10 @@ _____
       <li>"muteType": ?</li>
       <li>"action":?</li>
     </ol>
+  </p></li>
+  <li id="debugout24"><p>
+    24: Send Typing
+    <br>Example: <code>NO EXAMPLE</code>
   </p></li>
   <li id="debugout30"><p>
     30: Version Check
