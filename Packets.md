@@ -628,9 +628,9 @@ _____
     <br>Example: <code>42[27,{"m":"ILAMJAhBFBjBzCTlMiAHgEQCoCYCcAzgIYDqAHPAEakBiA7mecAMIC2tALlbgCYCMsfgDkAqtABqASRQo0wAA4ALGvgB2vABrDsEgKK0AykhYB2AFYBpFDMyz7SIA","mapname":"COolio mapio","mapauthor":"amogusSTAR"}]</code>
     <br>Items:
     <ol type=1>
-      <li>'m': The Map Data</li></a>
-      <li>'mapname': The Maps Name</li></a>
-      <li>'mapname': The Maps Author (Map Creator)</li></a>
+      <li>'m': The map's encoded data</li></a>
+      <li>'mapname': The map's name</li></a>
+      <li>'mapname': The map's author (Map Creator)</li></a>
     </ol>
   </p></li>
   <li id="out29"><p>
