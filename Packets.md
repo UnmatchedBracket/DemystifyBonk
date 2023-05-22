@@ -693,7 +693,7 @@ _____
   </p></li>
   <li id="out39"><p>
     39: Send Map Vote
-    <br>send a friend request to someone
+    <br>Vote up/down on a map
     <br>Example: <code>42[39,{"mapid":98062,"vote":1}]</code>
     <ol type=1>
       <li>"mapid": The Map ID you are voting</li>
