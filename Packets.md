@@ -768,7 +768,8 @@ _____
     <br>Needs documentation
     <br>Example: <code>42[40,{"sid":1,"allData":{"state":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","stateID":1,"fc":7,"inputs":[],"admin":[],"gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":9,"q":"custom","tl":false,"tea":false,"ga":"b","mo":"sp","bal":]},"random":[]}}]</code>
     <ol type=1>
-      <li>Object Of Data</li>
+      <li>"sid": Which player to inform about the ingame data</li>
+      <li>"allData": ?</li>
     </ol>
   </p></li>
   <li id="out41"><p>
