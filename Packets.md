@@ -34,14 +34,16 @@ Packets that break this rule:
 <li><a href="#inc8">8: Ready Change</a></li>
 <li><a href="#inc13">13: Game End</a></li>
 <li><a href="#inc15">15: Game Start</a></li>
-<li><a href="#inc16">16: Error</a></li>
+<li><a href="#inc16">16: Status Message</a></li>
 <li><a href="#inc18">18: Team Change</a></li>
 <li><a href="#inc19">19: Teamlock toggle</a></li>
 <li><a href="#inc20">20: Chat Message</a></li>
 <li><a href="#inc21">21: Initial data</a></li>
+<li><a href="#inc25">25: Map Reorder</a></li>
 <li><a href="#inc26">26: Mode change</a></li>
 <li><a href="#inc27">27: Change WL (Rounds)</a></li>
 <li><a href="#inc29">29: Map switch</a></li>
+<li><a href="#inc32">32: Afk Warn</a></li>
 <li><a href="#inc33">33: Map Suggest</a></li>
 <li><a href="#inc34">34: Map Suggest Client</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
@@ -52,6 +54,7 @@ Packets that break this rule:
 <li><a href="#inc46">46: Local Gained XP</a></li>
 <li><a href="#inc49">49: Created Room Share Link</a></li>
 <li><a href="#inc52">52: Tabbed</a></li>
+<li><a href="#inc57">57: Curate Result</a></li>
 <li><a href="#inc58">58: Room Name Update</a></li>
 <li><a href="#inc59">59: Room Password Update</a></li> 
 </ul>
@@ -89,11 +92,13 @@ Packets that break this rule:
 <li><a href="#out41">41  Get Pre Vote</a></li> 
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
+<li><a href="#out50">51: Send Curate</a></li> 
 </ul>
 	
 ### Outgoing Debug
 *Possibly unused/Debug Outgoing Packets*
 <ul>
+<li><a href="#debugout2">2: Test Ping</a></li> 
 <li><a href="#debugout3">3: Get Debug</a></li> 
 <li><a href="#debugout8">8: Silence Player</a></li> 
 <li><a href="#debugout24">24: Send Typing</a></li> 
@@ -102,6 +107,14 @@ Packets that break this rule:
 <li><a href="#debugout45">45: Desync Test</a></li> 
 <li><a href="#debugout46">46: Send Desync Res</a></li> 
 </ul>
+
+### Incoming Debug/Unused
+*Possibly unused/Debug Incoming Packets*
+<ul>
+<li><a href="#debuginc30">30: Typing</a></li> 
+<li><a href="#debuginc30">38: Debug Winner</a></li> 
+</ul>
+
 
 _____
 
@@ -155,7 +168,7 @@ _____
       <li>The new player's username.</li>
       <li><code>true</code> if the new user is a guest, otherwise <code>false</code>.</li>
       <li>The new player's level.</li>
-      <li>If the player is tabbed out?</li>
+      <li>If the player is joined via bypass</li>
       <li>A JSON object representing the new player's skin.</li>
     </ol>
   </p></li>
@@ -165,7 +178,7 @@ _____
     <br>Items:
     <ol type=1>
       <li>The player's ID.</li>
-      <li>The tick on which they left?</li>
+      <li>The tick on which they left? / Accumulator?</li>
     </ol>
   </p></li>
   <li id="inc6"><p>
@@ -180,6 +193,7 @@ _____
     <ol type=1>
       <li>The old host's ID.</li>
       <li>The new host's ID. If this is -1, host closed the room.</li>
+      <li>?</li>
     </ol>
   </p></li>
   <li id="inc7"><p>
@@ -220,20 +234,24 @@ _____
     <br>Items:
     <ol type=1>
       <li>Unix time of start??</li>
-      <li>No clue <code>¯\_(ツ)_/¯</code></li>
+      <li>Map Data encoded with LZ-String</li>
       <li>An object with map + other game-related data.</li>
     </ol>
   </p></li>
   <li id="inc16"><p>
-    16: Error
+    16: Status Message
     <br>Example: <code>42[16,"rate_limit_ready"]</code>
     <br>Items:
     <ol type=1>
-      <li>The error code. List (probably incomplete):
+      <li>The status codes. List (mostly complete):
       <ul>
         <li>arm rate limited: You spammed save replay too fast</li>
+	<li>room_not_found: You tried to join a room that doesn't exist anymore</li>
         <li>room_full: You tried to join a full room.</li>
         <li>banned: You tried to join a room you've been kicked from.</li>
+	<li>Initial data timeout.: </li>
+	<li>Connect error: </li>
+	<li>old_rotation: Quick play related</li>
         <li>no_client_entry: You sent some action but you're not in a room??</li>
         <li>already_in_this_room: You tried to join a room that your user is already in.</li>
         <li>join_rate_limited: You've tried to join rooms too quickly.</li>
@@ -288,7 +306,16 @@ _____
     <br>Example: <code>42[21,{"map":{"v":13,"s":{"re":false,"nc":false,"pq":1,"gd":25,"fl":false},"physics":{"shapes":[],"fixtures":[],"bodies":[],"bro":[],"joints":[],"ppm":12},"spawns":[],"capZones":[],"m":{"a":"user one","n":"Unnamed","dbv":2,"dbid":-1,"authid":-1,"date":"","rxid":0,"rxn":"","rxa":"","rxdb":1,"cr":[],"pub":false,"mo":""}},"gt":2,"wl":3,"q":false,"tl":true,"tea":false,"ga":"b","mo":"b","bal":[]}]</code>
     <br>Items:
     <ol type=1>
-      <li>An object with map + other game-related data.</li>
+      <li>An object containing the map data:
+    </ol>
+  </p></li>
+ <li id="inc25"><p>
+    25: Map Reorder
+    <br>Example: <code>NO EXAMPLE</code>
+    <br>Items:
+    <ol type=1>
+      <li>Start</li>
+      <li>End</li>
     </ol>
   </p></li>
   <li id="inc26"><p>
@@ -322,7 +349,17 @@ _____
     <br>Example: <code>42[29,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA"]</code>
     <br>Items:
     <ol type=1>
-      <li>An encoded string containing the map. This format will likely be demystified in another file soon.</li>
+      <li>An LZ-String encoded string containing the map. This format will likely be demystified in another file soon.</li>
+    </ol>
+  </p></li>
+  <li id="inc32"><p>
+    32: Afk Warn
+    <br>When you are about to be disconnected for being afk this is send to u
+    <br>Example: <code>42[32]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The LZ-String encoded version of the map data</li>
+      <li>Player ID of player who suggested the map</li>
     </ol>
   </p></li>
   <li id="inc33"><p>
@@ -331,7 +368,7 @@ _____
     <br>Example: <code>42[33,"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAjLAEyYCeAkgOICcArgFrQr8gACgHpRwgBwpEAWQFyQAXiA",2]</code>
     <br>Items:
     <ol type=1>
-      <li>The MAP Data</li>
+      <li>The LZ-String encoded version of the map data</li>
       <li>Player ID of player who suggested the map</li>
     </ol>
   </p></li>
@@ -417,6 +454,33 @@ _____
       <li>Player id of person who tabbed in/out</li>
       <li><code>false</code> if the player is now focused on the tab, otherwise <code>true</code>.</li>
   </ol>
+  </p></li>
+  <li id="inc57"><p>
+    57: Curate Result
+    <br>Result from /curateyes (related to /curate MESSAGEHERE)
+    <br>Example: unauthorized fail: <code>42[57,false,"unauthorised"]</code> 
+    <br>Unknown error fail <code>42[57,false,""]</code>
+    <br>Succeed <code>42[57,true,""]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Whether curation succeeded</li>
+      <li>Error / Status message </li>
+    </ol>
+    <ol type=1>
+      <li>The status / error codes:</li>
+      <ul>
+        <li>rate_limit: Rate limited, please wait a few seconds then try /curateyes again</li>
+	<li>not_logged_in: You're a guest!</li>
+        <li>invalid_mapid: Map issue</li>
+        <li>invalid_comment: Comment invalid</li>
+	<li>comment_too_long: Comment too long</li>
+	<li>invalid_dbv: Database version issue / map issue</li>
+	<li>unauthorised: You don't have those privileges</li>
+	<li>map_private: Map is private, it must be published</li>
+        <li>: unknown error</li>
+      </ul>
+      </li>
+    </ol>
   </p></li>
   <li id="inc58"><p>
     58: Room Name Update 
@@ -562,12 +626,11 @@ _____
   </li>
   <li id="out19"><p>
     19: Send Map Reorder
-    <br>Needs documentation
     <br>Example: No Example</code>
     <br>Items:
     <ol type=1>
-      <li>"s": ?</li>
-      <li>"e": ?</li>
+      <li>"s": start</li>
+      <li>"e": end</li>
     </ol>
   </p></li>
   <li id="out20"><p>
@@ -681,7 +744,7 @@ _____
       <li>"num": The number in "Game starting in NUMBER...."</li>
     </ol>
   </p></li>
-   <li id="out37"><p>
+  <li id="out37"><p>
     37: Send Abort Countdown
     <br>Send the message saying: countdown aboted
     <br>Example: <code>42[37]</code>
@@ -705,8 +768,7 @@ _____
     <br>Needs documentation
     <br>Example: <code>42[40,{"sid":1,"allData":{"state":"jWCW9ahaqG6GsGbWmycybYaVyafa7GAqc0bXagWWe0agouIGdtGhSKWavaAGefSlIWqacsOcamIjdyjBcFqKukaGe4IUCdirGa1anYcAkl0FguaALYATYgFUoJ8xcFaALCYu4ARsQBiAVkL0AFJYuIIoXABuuADCAIYwAIpcJnBUmt4ALpG4xKhoEUhmWiEAoslqAM55AJ5cAGbO1aD0HN51ohBcZr4AVhBR0UiCJdEmgQB2hAAiHV2EFf0xHjAAzChTDdgmABZsscTAKxQo3hoNrFwWWh7d28u69joU4xQlKU9mpDr1OQxaVPsvj8SiRvGk6vRoIJAs54kl7NUAKbEADsAEYEcjBBi1EjiHAAJbZaIUFbiey4CwwUTVMYZDxgSFccaBCo8XCiIaBCKxIo9KykCoBKRjaoUXBcAC8QA","stateID":1,"fc":7,"inputs":[],"admin":[],"gs":{"map":"ILAMJAhBFBjBzCTlMiAJgNQEYFsCsAFtgOqYDWIhAKgIYDiAnAMwCaATAGIBeAWtCkEgACgHpxogBwpEAWSEKQAXiA","gt":2,"wl":9,"q":"custom","tl":false,"tea":false,"ga":"b","mo":"sp","bal":]},"random":[]}}]</code>
     <ol type=1>
-      <li>"sid": Which player to inform about the ingame data</li>
-      <li>"allData": ?</li>
+      <li>Object Of Data</li>
     </ol>
   </p></li>
   <li id="out41"><p>
@@ -730,8 +792,22 @@ _____
     <br>Makes it so that when the host leaves the room, the room ends.
     <br>Example: <code>42[50]</code>
   </p></li>
+   <li id="out51"><p>
+    51: Send Curate
+    <br>curate by typing /curate yourmessage then /curateyes to confirm
+    <br>Example <code>42[51,{"mapid":996496,"dbv":1,"comment":"llolololololo"}]</code>
+    <ol type=1>
+      <li>"mapid": The Map Id</li>
+      <li>"dbv": Database Version</li>
+      <li>"comment": The comment you entered</li>
+    </ol>
+  </p></li>
   <br><br>
   <i>Possibly unused/Debug Outgoing Packets</i>
+  <li id="debugout2"><p>
+    2: Test Ping
+    <br>Example: <code>42[2]</code>
+  </p></li>
   <li id="debugout3"><p>
     3: Get Debug
     <br>Example: <code>42[3]</code>
@@ -766,17 +842,34 @@ _____
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
       <li>"id": The players id to test whether they are desynced>?</li>
-      <li>"a": ?</li>
+      <li>"a": accumulator?</li>
     </ol>
   </p></li>
   <li id="debugout46"><p>
-    46: Send Desync Res
+    46: Send Desync Response
     <br>Example: <code>NO EXAMPLE</code>
     <ol type=1>
       <li>"rid": ?</li>
-      <li>"sid": Player Id</li>
+      <li>"sid": Session Id</li>
       <li>"s": ?</li>
-      <li>"a": ?</li>
+      <li>"a": accumulator?</li>
+    </ol>
+  </p></li>
+  <i>Possibly unused/Debug Incoming Packets</i>
+  <li id="debuginc30"><p>
+    30: Typing
+    <br>Received when a player is typing, this is unused in bonk 
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>Player Id of who is typing?</li>
+    </ol>
+  </p></li>
+  <li id="debuginc38"><p>
+    38: Debug Winner
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>?</li>
+      <li>?</li>   
     </ol>
   </p></li>
  </ul>
