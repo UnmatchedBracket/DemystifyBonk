@@ -46,6 +46,7 @@ Packets that break this rule:
 <li><a href="#inc32">32: Afk Warn</a></li>
 <li><a href="#inc33">33: Map Suggest</a></li>
 <li><a href="#inc34">34: Map Suggest Client</a></li>
+<li><a href="#inc36">36: Balance Set</a></li>
 <li><a href="#inc40">40: Save Replay</a></li>
 <li><a href="#inc42">42: Friend Req</a></li>
 <li><a href="#inc43">43: Game starting Countdown</a></li>
@@ -381,6 +382,15 @@ _____
       <li>The Title of the map that was suggested</li>
       <li>The Author of the map that was suggested</li>
       <li>Player ID of player who suggested the map</li>
+    </ol>
+  </p></li>
+  <li id="inc36"><p>
+    36: Balance Set
+    <br>Example: <code>42[36,1,-55]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Player ID of player whos balance was changed</li>
+      <li>The balance abount, as an integer from -100 to 100.</li>
     </ol>
   </p></li>
   <li id="inc40"><p>
