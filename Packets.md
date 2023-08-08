@@ -265,8 +265,8 @@ _____
         <li>rate_limit_abortcountdown: You sent too many "Countdown aborted!" messages.</li>
         <li>rate_limit_sma: You changed the map too quickly.</li>
         <li>rate_limit_cot: You changed teams too quickly.</li>
-        <li>rate_limit_sgt: You changed modes too quickly</li>
-	<li>rate_limit_pong: ?</li>
+        <li>rate_limit_sgt: You changed modes too quickly.</li>
+	<li>rate_limit_pong: You sent the ping packet too quickly.</li>
         <li>rate_limit_tl: You locked the teams too quickly</li>
         <li>rate_limit: Generic rate-limit. You did something too fast.</li>
         <li>not_hosting: You attempted to do an action that requires you to be the game's host.</li>
@@ -504,7 +504,7 @@ _____
    <li id="inc59"><p>
     59: Room Pass Update 
     <br>Happens when host changes password name using /roompass "password here" or /clearroompass
-    <br>Example: host does: /roomname "1234" result everyone sees: <code>42[59,1]</code>
+    <br>Example: host does: /roompass "1234" result everyone sees: <code>42[59,1]</code>
     <br>Items:
     <ol type=1>
       <li>room Password Update Type (0 Being password was cleared 1 being password was set to something)</a>
