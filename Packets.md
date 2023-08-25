@@ -266,6 +266,7 @@ _____
         <li>rate_limit_sma: You changed the map too quickly.</li>
         <li>rate_limit_cot: You changed teams too quickly.</li>
         <li>rate_limit_sgt: You changed modes too quickly.</li>
+	<li>rate_limit_rtl: You sent the return to lobby packet too quickly.</li>
 	<li>rate_limit_pong: You sent the ping packet too quickly.</li>
         <li>rate_limit_tl: You locked the teams too quickly</li>
         <li>rate_limit: Generic rate-limit. You did something too fast.</li>
@@ -618,7 +619,7 @@ _____
   </p></li>
     <li id="out14"><p>
     14: Return To Lobby
-    <br>Exit out of the game to return to the lobby
+    <br>Exit out of the game to return to the lobby.
     <br>Example: <code>42[14]</code>
   </p></li>
   <li id="out16"><p>
@@ -631,7 +632,7 @@ _____
   </p></li>
   <li id="out17"><p>
     17: All Ready Reset
-    <br>The host can send this packet to set everyones ready status to false
+    <br>The host can send this packet to set everyones ready status to false.
     <br>Example: <code>42[17]</code>
   </li>
   <li id="out19"><p>
@@ -645,7 +646,7 @@ _____
   </p></li>
   <li id="out20"><p>
     20: Send Mode
-    <br>Changes the room's mode
+    <br>Changes the room's mode.
     <br>Example: <code>42[20,{"ga":"b","mo":"ar"}]</code>
     <br>Items:
     <ol type=1>
@@ -664,7 +665,7 @@ _____
   </p></li>
   <li id="out21"><p>
     21: Send WL (Rounds)
-    <br>Sets the amount of rounds to win
+    <br>Sets the amount of rounds to win.
     <br>Example: <code>42[21,{"w":6}]</code>
     <br>Items:
     <ol type=1>
@@ -681,7 +682,7 @@ _____
   </p>
   <li id="out23"><p>
     23: Send Map Add
-    <br>Change the current map
+    <br>Changes the current map.
     <br>Example: <code>42[23,{"m":"ILAMJAhBFBjBzCTlMiArAFQFoA0AW6AkgKIBqALrABIBKxJAjPrCAHIBGjbdJANgGk2AERIAvbAFsAYpOwoFJYMIDqATky1QtAFIBlAFbQAHgFkATNnxToSADIUATgFU0SRKYVekAXiA"}]</code>
     <br>Items:
     <ol type=1>
@@ -708,7 +709,7 @@ _____
   </p></li>
   <li id="out29"><p>
     29: Send Balance
-    <br>Change a players nerf/buff
+    <br>Change a players nerf/buff.
     <br>Example: <code>42[29,{"sid":2,"bal":-55}]</code>
     <br>Items:
     <ol type=1>
