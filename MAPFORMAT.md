@@ -1,4 +1,4 @@
-TODO: Explain more
+[A Repl that encodes/decodes maps and "is" data.](https://replit.com/@UnmatchedBracket/bonkio-is-decoder)
 
 What the map keys mean (thanks kklkkj for [this amazing file](https://github.com/kklkkj/kklee/blob/master/src/kkleeApi.nim)):
 - v: The map data version.
