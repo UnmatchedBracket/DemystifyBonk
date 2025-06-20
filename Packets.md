@@ -32,6 +32,7 @@ Packets that break this rule:
 <li><a href="#inc6">6: Host leave</a></li>
 <li><a href="#inc7">7: Inputs</a></li>
 <li><a href="#inc8">8: Ready Change</a></li>
+<li><a href="#inc9">9: All Ready Reset</a></li>
 <li><a href="#inc13">13: Game End</a></li>
 <li><a href="#inc15">15: Game Start</a></li>
 <li><a href="#inc16">16: Status Message</a></li>
@@ -90,10 +91,12 @@ Packets that break this rule:
 <li><a href="#out38">38: Send Req XP</a></li> 
 <li><a href="#out39">39: Send Map Vote</a></li> 
 <li><a href="#out39">40: Inform In Game</a></li> 
-<li><a href="#out41">41  Get Pre Vote</a></li> 
+<li><a href="#out41">41:  Get Pre Vote</a></li> 
 <li><a href="#out44">44: Tabbed</a></li> 
 <li><a href="#out50">50: Send No Host Swap</a></li> 
 <li><a href="#out50">51: Send Curate</a></li> 
+<li><a href="#out51">52: Room Name Update</a></li> 
+<li><a href="#out52">53: Room Password Update</a></li> 
 </ul>
 	
 ### Outgoing Debug
@@ -224,6 +227,10 @@ _____
       <li>The ID of the person that changed their [READY] status</li>
       <li><code>true</code> if the player is ready (has a checkmark), otherwise <code>false</code>.</li>
     </ol>
+  </p></li>
+  <li id="inc9"><p>
+    9: All Ready Reset
+    <br>Example: <code>42[9]</code>
   </p></li>
   <li id="inc13"><p>
     13: Game End
@@ -807,11 +814,27 @@ _____
    <li id="out51"><p>
     51: Send Curate
     <br>curate by typing /curate yourmessage then /curateyes to confirm
-    <br>Example <code>42[51,{"mapid":996496,"dbv":1,"comment":"llolololololo"}]</code>
+    <br>Example: <code>42[51,{"mapid":996496,"dbv":1,"comment":"llolololololo"}]</code>
     <ol type=1>
       <li>"mapid": The Map Id</li>
       <li>"dbv": Database Version</li>
       <li>"comment": The comment you entered</li>
+    </ol>
+  </p></li>
+   <li id="out52"><p>
+    52: Room Name Update
+    <br>Sent when host changes room name using /roomname "text here"
+    <br>Example: <code>42[52,{"newName":"text here"}]</code>
+    <ol type=1>
+      <li>"newName": The new room name</li>
+    </ol>
+  </p></li>
+   <li id="out53"><p>
+    53: Room Password Update
+    <br>Sent when host changes room password using /roompass "password here" or when the host uses /clearroompass
+    <br>Example: <code>42[53,{"newPass":"password here"}]</code>
+    <ol type=1>
+      <li>"newPass": The new room password (empty if /clearroompass is used)</li>
     </ol>
   </p></li>
   <br><br>
