@@ -359,7 +359,7 @@ _____
     <br>Items:
     <ol type=1>
       <li>Player ID</li>
-      <li>Kicked if 0, Banned if 1</li>
+      <li>Kicked if true, Banned if false</li>
     </ol>
   </p></li>
  <li id="inc25"><p>
