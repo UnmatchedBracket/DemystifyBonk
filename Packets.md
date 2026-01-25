@@ -33,6 +33,7 @@ Packets that break this rule:
 <li><a href="#inc7">7: Inputs</a></li>
 <li><a href="#inc8">8: Ready Change</a></li>
 <li><a href="#inc9">9: All Ready Reset</a></li>
+<li><a href="#inc12">12: Username change</a></li>
 <li><a href="#inc13">13: Game End</a></li>
 <li><a href="#inc15">15: Game Start</a></li>
 <li><a href="#inc16">16: Status Message</a></li>
@@ -231,6 +232,16 @@ _____
   <li id="inc9"><p>
     9: All Ready Reset
     <br>Example: <code>42[9]</code>
+  </p></li>
+  <li id="inc12"><p>
+    12: Username Change
+    <br>A non-guest player with the same username as guest joined, guest's username must change.
+    <br>Example: <code>42[12,0,"123qwe2"]</code>
+    <br>Items:
+    <ol type=1>
+      <li>The player's ID.</li>
+      <li>The player's new username.</li>
+    </ol>
   </p></li>
   <li id="inc13"><p>
     13: Game End
