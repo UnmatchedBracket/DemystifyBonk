@@ -26,6 +26,7 @@ Packets that break this rule:
 ### Incoming:
 <ul>
 <li><a href="#inc1">1: Update Pings</a></li>
+<li><a href="#inc2">2: Room created</a></li>
 <li><a href="#inc3">3: Room join</a></li>
 <li><a href="#inc4">4: Player join</a></li>
 <li><a href="#inc5">5: Player leave</a></li>
@@ -41,6 +42,7 @@ Packets that break this rule:
 <li><a href="#inc19">19: Teamlock toggle</a></li>
 <li><a href="#inc20">20: Chat Message</a></li>
 <li><a href="#inc21">21: Initial data</a></li>
+<li><a href="#inc24">24: Player banned/kicked</a></li>
 <li><a href="#inc25">25: Map Reorder</a></li>
 <li><a href="#inc26">26: Mode change</a></li>
 <li><a href="#inc27">27: Change WL (Rounds)</a></li>
@@ -116,6 +118,8 @@ Packets that break this rule:
 ### Incoming Debug/Unused
 *Possibly unused/Debug Incoming Packets*
 <ul>
+<li><a href="#debuginc10">10: Server Mute</a></li> 
+<li><a href="#debuginc11">11: Server Unmute</a></li> 
 <li><a href="#debuginc30">30: Typing</a></li> 
 <li><a href="#debuginc30">38: Debug Winner</a></li> 
 </ul>
@@ -134,6 +138,21 @@ _____
     <ol type=1>
       <li>An object with the other user's ping times.</li>
       <li>An number to determine which ping a client is responding to. The client should echo <code>42[1,{"id":<this number>}]</code> when this packet is recieved.</li>
+    </ol>
+  </p></li>
+  <li id="inc2"><p>
+    2: Room created
+    <br>This packet is used when the room was created.
+    <br>Example: <code>42[2,"TCwlcVAGzgI6J-4gAAHo",1,null]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Room ID (Unused).</li>
+      <li>Team (Always 1, or FFA) (See <a href="#common_schemes">Common Scemes</a>)</li>
+      <li>Map list object for quick play (Always null normally)</li>
+      <ul>
+        <li>"size": Amount of maps</li>
+        <li>"maps": Map list (In map data)</li>
+      </ul>
     </ol>
   </p></li>
   <li id="inc3"><p>
@@ -160,7 +179,11 @@ _____
       <li><code>true</code> if teams are locked, otherwise <code>false</code>.</li>
       <li>Room ID.</li>
       <li>Room bypass. Use with the Room ID to get the share link (https://bonk.io/&lt;room id right-padded to six digits&gt;&lt;room bypass&gt;)</li>
-      <li>I have no clue what this is. AFAIK it's always <code>null</code></li>
+      <li>Map list object for quick play (Always null normally)</li>
+      <ul>
+        <li>"size": Amount of maps</li>
+        <li>"maps": Map list (In map data)</li>
+      </ul>
     </ol>
   </p></li>
   <li id="inc4"><p>
@@ -327,6 +350,16 @@ _____
     <br>Items:
     <ol type=1>
       <li>An object containing the map data:
+    </ol>
+  </p></li>
+  <li id="inc24"><p>
+    24: Player was banned/kicked
+    <br>The host have kicked or banned the player.
+    <br>Example: <code>42[24,1,false]</code>
+    <br>Items:
+    <ol type=1>
+      <li>Player ID</li>
+      <li>Kicked if 0, Banned if 1</li>
     </ol>
   </p></li>
  <li id="inc25"><p>
@@ -902,6 +935,24 @@ _____
     </ol>
   </p></li>
   <i>Possibly unused/Debug Incoming Packets</i>
+  <li id="debuginc10"><p>
+    10: Server Mute
+    <br>Received when a player is muted
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>Muted player id</li>
+      <li>?</li>
+    </ol>
+  </p></li>
+  <li id="debuginc11"><p>
+    11: Server Unmute
+    <br>Received when a player is unmuted
+    <br>Example: <code>NO EXAMPLE</code>
+    <ol type=1>
+      <li>Unmuted player id</li>
+      <li>?</li>
+    </ol>
+  </p></li>
   <li id="debuginc30"><p>
     30: Typing
     <br>Received when a player is typing, this is unused in bonk 
